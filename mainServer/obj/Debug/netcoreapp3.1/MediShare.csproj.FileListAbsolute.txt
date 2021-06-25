@@ -38,7 +38,6 @@ C:\WebAPIProjects\MediShare\mainServer\bin\Debug\netcoreapp3.1\System.Configurat
 C:\WebAPIProjects\MediShare\mainServer\bin\Debug\netcoreapp3.1\System.IdentityModel.Tokens.Jwt.dll
 C:\WebAPIProjects\MediShare\mainServer\bin\Debug\netcoreapp3.1\System.Security.Cryptography.ProtectedData.dll
 C:\WebAPIProjects\MediShare\mainServer\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
-C:\WebAPIProjects\MediShare\mainServer\obj\Debug\netcoreapp3.1\MediShare.csprojAssemblyReference.cache
 C:\WebAPIProjects\MediShare\mainServer\obj\Debug\netcoreapp3.1\MediShare.AssemblyInfoInputs.cache
 C:\WebAPIProjects\MediShare\mainServer\obj\Debug\netcoreapp3.1\MediShare.AssemblyInfo.cs
 C:\WebAPIProjects\MediShare\mainServer\obj\Debug\netcoreapp3.1\MediShare.csproj.CoreCompileInputs.cache
@@ -70,3 +69,4 @@ C:\WebAPIProjects\MediShare\mainServer\obj\Debug\netcoreapp3.1\Razor\wwwroot\Ext
 C:\WebAPIProjects\MediShare\mainServer\obj\Debug\netcoreapp3.1\Razor\wwwroot\Extensions\PaymentFailureView.cshtml.g.cs
 C:\WebAPIProjects\MediShare\mainServer\obj\Debug\netcoreapp3.1\Razor\wwwroot\Extensions\PaymentSuccessView.cshtml.g.cs
 C:\WebAPIProjects\MediShare\mainServer\obj\Debug\netcoreapp3.1\Razor\wwwroot\Extensions\RegistrationView.cshtml.g.cs
+C:\WebAPIProjects\MediShare\mainServer\obj\Debug\netcoreapp3.1\MediShare.csproj.AssemblyReference.cache

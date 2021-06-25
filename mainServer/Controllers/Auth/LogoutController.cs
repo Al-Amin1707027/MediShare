@@ -10,10 +10,7 @@ namespace mainServer.Controllers.Auth
             return Redirect("~/");
         }
 
-        public async Task<IActionResult> MyName()
-        {
-            Console.WriteLine("this is fuck");
-        }
+
         
     }
 }
