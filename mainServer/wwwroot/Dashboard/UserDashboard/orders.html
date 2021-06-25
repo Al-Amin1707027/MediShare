@@ -1,0 +1,189 @@
+<section class="content-header">
+    <h1>
+        Orders
+        <small>Manage your orders</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-server"></i> Home</a></li>
+        <li class="active">My Orders</li>
+    </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        
+        <!-- /.col -->
+        <div class="col-md-9">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Order Table</h3>
+
+                    <!-- /.box-tools -->
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body no-padding">
+                    <div class="mailbox-controls">
+                        <!-- /.btn-group -->
+                        <button type="button" onclick="LoadOrderList('NotDefault')" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
+
+                        <div class="pull-right">
+                            <!-- 1-50/200 -->
+                            <div class="btn-group">
+                                <button type="button" onclick="LoadOrderList('back_button')" onclick="" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
+                                <button type="button" onclick="LoadOrderList('Default')" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
+                            </div>
+                            <!-- /.btn-group -->
+                        </div>
+                        <!-- /.pull-right -->
+                    </div>
+                    <div class="table-responsive mailbox-messages">
+                        <table class="table table-hover table-striped">
+                            <tbody id="orders">
+
+
+                            </tbody>
+                        </table>
+                        <!-- /.table -->
+                    </div>
+                    <!-- /.mail-box-messages -->
+                </div>
+                <!-- /.box-body -->
+                <div class="box-footer no-padding">
+                    <div class="mailbox-controls">
+                       
+                        <!-- /.btn-group -->
+                        <button type="button" onclick="LoadOrderList('NotDefault')" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
+                        <div class="pull-right">
+                            <!-- 1-50/200 -->
+                            <div class="btn-group">
+                                <button type="button" onclick="LoadOrderList('back_button')" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
+                                <button type="button" onclick="LoadOrderList('Default')" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
+                            </div>
+                            <!-- /.btn-group -->
+                        </div>
+                        <!-- /.pull-right -->
+                    </div>
+                </div>
+            </div>
+            <!-- /. box -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+
+
+</section>
+
+
+
+<script type="text/javascript">
+
+    var offset_orders = 0;
+    var perPageCount_orders = 3;
+    var chck = true;
+    var editID_global;
+    LoadOrderList('Default');
+
+
+
+
+    function LoadOrderList(pool) {
+        if (pool == "back_button") {
+            offset_orders = (offset_orders - perPageCount_orders - perPageCount_orders);
+            if (offset_orders < 0) offset_orders = 0;
+        }
+        if (pool == "NotDefault") {
+            offset_orders = 0;
+        }
+
+        $.ajax({
+            type: "GET",
+            url: "/Order/GetOrderList?pool=" + pool + "&offset_orders=" + offset_orders + "&perPageCount_orders=" + perPageCount_orders,
+            success: function(response) {
+                var orders = $("#orders");
+                orders.empty();
+                var serial_no = 1;
+
+                orders.append(
+                    $('<tr>').append(
+                        $('<th>').text('Serial No.'),
+                        $('<th>').text('Order No'),
+                        $('<th>').text('Product Name'),
+                        $('<th>').text('Product Id'),
+                        $('<th>').text('Category'),
+                        $('<th>').text('Quantity'),
+                        $('<th>').text('Status'),
+                        $('<th>').text('Order Date'),
+                        $('<th>').text('Delivery Date')
+                    )
+                );
+
+
+
+                $.each(response, function(i, item) {
+
+                    if (item.product_name != "00") {
+                        chck = true;
+                        $('<tr>').append(
+                            $('<td class="mailbox-name">').text(serial_no),
+                                $('<td class="mailbox-name">').text("AJDFGYUWB"),
+                            $('<td class="mailbox-name">').text(item.product_name),
+                            $('<td class="mailbox-name">').text(item.product_id),
+                            $('<td class="mailbox-name">').text(item.category),
+                            $('<td class="mailbox-name">').text(item.quantity)
+                            
+
+                        ).appendTo(orders);
+                        serial_no++;
+                    } else {
+                        chck = false;
+                        $('<tr>').append(
+                            $('<td class="mailbox-name">'),
+                            $('<td class="mailbox-name">'),
+                            $('<td class="mailbox-name">').text("No more data Available")
+
+
+                        ).appendTo(orders);
+                    }
+                });
+            },
+            failure: function(response) {
+                alert(response);
+            }
+        });
+        if (chck) offset_orders = offset_orders + perPageCount_orders;
+    }
+
+
+
+
+    //sending delete id using ajax and json data
+    function SendDeleteID(deleteID) {
+        console.log("this is SendDeleteID" + deleteID);
+        $.ajax({
+            url: "/Hosts/HostRowDelete?host_id_external=" + deleteID,
+            success: function(result) {
+
+                console.log("successful");
+
+                eval(result.Script);
+                LoadOrderList('Default');
+
+            },
+            error: function() {
+                alert("Error");
+            }
+        });
+    }
+
+</script>
+
+
+
+
+
+
+
+
+

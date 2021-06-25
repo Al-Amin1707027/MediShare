@@ -1,0 +1,112 @@
+@model MediShare.Models.LoginModel
+
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>MediShare - Your Daily Medical Store</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="dist/HomePageLayout/assets/favicon.ico" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="dist/HomePageLayout/css/styles.css" rel="stylesheet" />
+
+    </head>
+    <body>
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <a href="/" class="logo">
+                    <span class="logo-lg"><i class="fas fa-clinic-medical" style="color: #c5eaff"></i>MediShare</span>
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item"><a class="nav-link" href="https://www.google.com/">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                            <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                            </svg><i class="bi bi-cart">cart</i></a></li>
+                        <li class="nav-item"><a class="nav-link" href="#!">Services</a></li>
+                        @* <li class="nav-item"><a class="nav-link" href="/Login">Login/Register</a></li> *@
+                        @{
+                            if(Model.password != "n"){
+                                @* <li class="nav-item"><a class="nav-link" href="/UserDashboard">@Model.email</a></li> *@
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                                                    aria-expanded="false">
+                                                    @Model.email
+                                    </button>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item" href="/UserDashboard">Dashboard</a>
+                                            <a class="dropdown-item" href="/Logout">Logout</a>
+                                        </div>
+                                </div>
+                            }else{
+                                <li class="nav-item"><a class="nav-link" href="/Login">Login/Register</a></li>
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div>
+            @RenderBody();
+        </div>
+
+
+        <footer class="py-5 bg-dark">
+            <div class="container">
+                <p class="m-0 text-center text-white">Copyright &copy; Your Website 2021</p>
+            </div>
+            <li class="nav-item"><a class="nav-link" href="#!">Test Button</a></li>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="dist/HomePageLayout/js/scripts.js"></script>
+    </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+<div class="header navigation">
+  
+  <div class="col-xl-9 col-lg-10 col-sm-8 col-7">
+
+    <ul class="navbar-nav flex-row justify-content-end flex-wrap align-items-center mr-lg-4 mr-xl-0">
+
+      <li class="nav-item px-3 text-uppercase mb-0 position-relative d-lg-flex">
+        <div id="cart" class="d-none">
+
+        </div>
+        <a href="/store/cart.stml" class="cart position-relative d-inline-flex" aria-label="View your shopping cart">
+          <i class="fas fa fa-shopping-cart fa-lg"></i>
+          <span class="cart-basket d-flex align-items-center justify-content-center">
+            0
+          </span>
+        </a>
+      </li>
+      <button id="sidenav-open-btn" class="menu-hamburger position-absolute pointer p-0">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,389 @@
+<section class="content-header">
+    <h1>
+        Sales
+        <small>Manage your sales section</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-server"></i> Home</a></li>
+        <li class="active">Sales</li>
+    </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-md-1">
+            <button type="button" class="btn btn-primary btn-block margin-bottom" data-toggle="modal" data-target="#modal-default">
+                Add New Item
+            </button>
+
+
+            <div class="modal fade" id="modal-default">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">Enter New Item Data</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="pkgnm">Product Name</label>
+                                <input type="text" id="product_name" class="form-control" id="pkgnm" placeholder="Enter package name">
+                            </div>
+                            <div class="form-group">
+                                <label for="comb1">Category</label>
+                                <input list=units id="category" name="unit" class="form-control">
+                                    <datalist id=units>
+                                        <option value="Heart Drugs"></option>
+                                        <option value="Everyday Drugs"></option>
+                                        <option value="Other Drugs"></option>
+                                        <option value="Medical Equipments"></option>
+                                    </datalist>
+                            </div>
+                            <div class="form-group">
+                                <label for="pkgnm">Quantity</label>
+                                <input type="text" id="quantity" class="form-control" id="pkgnnm" placeholder="Enter package price">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                            <button type="button" onclick="AddNewItem()" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <!-- /.modal -->
+
+
+
+
+            <!-- /.box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-11">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Product Table</h3>
+
+                    <div class="box-tools pull-right">
+                        <div class="has-feedback">
+                            <!-- <input type="text" class="form-control input-sm" placeholder="Search Mail">
+                            <span class="glyphicon glyphicon-search form-control-feedback"></span> -->
+                        </div>
+                    </div>
+                    <!-- /.box-tools -->
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body no-padding">
+                    <div class="mailbox-controls">
+                        <!-- Check all button -->
+                        <!-- <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i> -->
+                        </button>
+                        <div class="btn-group">
+                            <!-- <button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
+                            <button type="button" class="btn btn-default btn-sm"><i class="fa fa-reply"></i></button>
+                            <button type="button" class="btn btn-default btn-sm"><i class="fa fa-share"></i></button> -->
+                        </div>
+                        <!-- /.btn-group -->
+                        <button type="button" onclick="LoadSalesList('NotDefault')" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
+
+                        <div class="pull-right">
+                            <!-- 1-50/200 -->
+                            <div class="btn-group">
+                                <button type="button" onclick="LoadHostList('back_button')" onclick="" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
+                                <button type="button" onclick="LoadHostList('Default')" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
+                            </div>
+                            <!-- /.btn-group -->
+                        </div>
+                        <!-- /.pull-right -->
+                    </div>
+                    <div class="table-responsive mailbox-messages">
+                        <table class="table table-hover table-striped">
+                            <tbody id="sales">
+
+
+                            </tbody>
+                        </table>
+                        <!-- /.table -->
+                    </div>
+                    <!-- /.mail-box-messages -->
+                </div>
+                <!-- /.box-body -->
+                <div class="box-footer no-padding">
+                    <div class="mailbox-controls">
+                        <!-- Check all button -->
+                        <!-- <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i> -->
+                        </button>
+                        <div class="btn-group">
+                            <!-- <button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
+                            <button type="button" class="btn btn-default btn-sm"><i class="fa fa-reply"></i></button>
+                            <button type="button" class="btn btn-default btn-sm"><i class="fa fa-share"></i></button> -->
+                        </div>
+                        <!-- /.btn-group -->
+                        <button type="button" onclick="LoadSalesList('NotDefault')" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
+                        <div class="pull-right">
+                            <!-- 1-50/200 -->
+                            <div class="btn-group">
+                                <button type="button" onclick="LoadHostList('back_button')" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
+                                <button type="button" onclick="LoadHostList('Default')" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
+                            </div>
+                            <!-- /.btn-group -->
+                        </div>
+                        <!-- /.pull-right -->
+                    </div>
+                </div>
+            </div>
+            <!-- /. box -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+
+    <div class="modal fade" id="modal-new-pkg">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Edit Host Data</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="pkgnm">Product Name</label>
+                        <input type="text" id="host_id_external" class="form-control" id="pkgnm" placeholder="Enter package name">
+                    </div>
+                    <div class="form-group">
+                        <label for="comb1">Unit *</label>
+                        <input list=units id="comb1" name="unit" class="form-control">
+                            <datalist id=units>
+                                <option value="minute"></option>
+                                <option value="UC"></option>
+                            </datalist>
+                    </div>
+                    <div class="form-group">
+                        <label for="pkgnm">Quantity</label>
+                        <input type="text" id="category_id" class="form-control" id="pkgnnm" placeholder="Enter package price">
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                    <button type="submit" onclick="EditRow()" data-dismiss="modal" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+
+</section>
+
+
+
+<script type="text/javascript">
+    //INITIALIZE SPARKLINE CHARTS
+    //$('.sparkline-1').sparkline();
+
+    var offset_sales = 0;
+    var perPageCount_sales = 3;
+    var chck = true;
+    var editID_global;
+    LoadSalesList('Default');
+
+
+
+
+    function LoadSalesList(pool) {
+        if (pool == "back_button") {
+            offset_sales = (offset_sales - perPageCount_sales - perPageCount_sales);
+            if (offset_sales < 0) offset_sales = 0;
+        }
+        if (pool == "NotDefault") {
+            offset_sales = 0;
+        }
+
+        $.ajax({
+            type: "GET",
+            url: "/Sales/GetSalesList?pool=" + pool + "&offset_sales=" + offset_sales + "&perPageCount_sales=" + perPageCount_sales,
+            success: function(response) {
+                var sales = $("#sales");
+                sales.empty();
+                var serial_no = 1;
+
+                sales.append(
+                    $('<tr>').append(
+                        $('<th>').text('Serial No.'),
+                        $('<th>').text('Product Id'),
+                        $('<th>').text('Product Name'),
+                        $('<th>').text('Category'),
+                        $('<th>').text('Quantity'),
+                        $('<th>').text('Status'),
+                        $('<th>').text('Upload Date'),
+                        $('<th>').text('Number of orders')
+                    )
+                );
+
+
+
+                $.each(response, function(i, item) {
+
+                    if (item.product_name != "00") {
+                        chck = true;
+                        $('<tr>').append(
+                            $('<td class="mailbox-name">').text(serial_no),
+                            $('<td class="mailbox-name">').text(item.product_id),
+                            $('<td class="mailbox-name">').text(item.product_name),
+                            $('<td class="mailbox-name">').text(item.category),
+                            $('<td class="mailbox-name">').text(item.quantity),
+                            $('<td class="mailbox-name">').text(item.status),
+                            $('<td class="mailbox-name">').text(item.upload_date),
+                            $('<td class="mailbox-name">').text(item.number_of_orders),
+                            //$('<button type="button" class="btn btn-default btn-sm" onclick="SendDeleteID(hello)"><i class="fa fa-trash-o">'),
+                            //$('<a data-id="' + item.host_id_external + '" href="#" class="linkdelete"><i class="fa fa-trash-o">'),
+                            //$('<a data-id="Hello890" href="#" class="linkdelete"><i class="fa fa-edit">'),
+                            $('<a href="#" onclick="SendDeleteID(\'' + item.host_id_external + '\');"><i class="fa fa-trash-o">'),
+                            //$('<td class="mailbox-name">'),
+                            $('<a type="button" onclick="SendEditID(\'' + item.host_id_external + '\');" class="btn btn-default btn-sm" data-toggle="modal" data-target="#modal-new-pkg"><i class="fa fa-edit">')
+
+                        ).appendTo(sales);
+                        serial_no++;
+                    } else {
+                        chck = false;
+                        $('<tr>').append(
+                            $('<td class="mailbox-name">'),
+                            $('<td class="mailbox-name">'),
+                            $('<td class="mailbox-name">').text("No more data Available")
+
+
+                        ).appendTo(sales);
+                    }
+                });
+            },
+            failure: function(response) {
+                alert(response);
+            }
+        });
+        if (chck) offset_sales = offset_sales + perPageCount_sales;
+    }
+
+
+    // // for getting id of a delete 
+    // $(".linkdelete").click(function(e) {
+
+    //     var x = $(this).data('id');
+    //     SendDeleteID(x);
+    //     console.log(x);
+
+    // });
+
+
+    //sending delete id using ajax and json data
+    function SendDeleteID(deleteID) {
+        console.log("this is SendDeleteID" + deleteID);
+        $.ajax({
+            url: "/Hosts/HostRowDelete?host_id_external=" + deleteID,
+            // data: {
+            //     deleteID: deleteID
+            // },
+            // type: "Post",
+            // dataType: "Json",
+            success: function(result) {
+
+                console.log("successful");
+
+                eval(result.Script);
+                LoadHostList('Default');
+
+            },
+            error: function() {
+                alert("Error");
+            }
+        });
+    }
+
+
+    function SendEditID(editID) {
+        editID_global = editID;
+        $.ajax({
+            type: "GET",
+            url: "/Hosts/GetHostDataForEdit?host_id_external=" + editID,
+            success: function(response) {
+                $.each(response, function(i, item) {
+                    document.getElementById("host_id_external").value = item.host_id_external;
+                    document.getElementById("host_name").value = item.host_name;
+                });
+            },
+            failure: function(response) {
+                alert(response);
+            }
+        });
+    }
+
+
+    function EditRow() {
+        var host_id_external = document.getElementById("host_id_external").value;
+        var host_name = document.getElementById("host_name").value;
+        var category_id = document.getElementById("category_id").value;
+        var access_id = document.getElementById("access_id").value;
+
+        console.log(editID_global);
+
+
+        $.ajax({
+            url: "/Hosts/EditHostRow",
+            data: {
+                host_id_external: host_id_external,
+                host_name: host_name,
+                category_id: category_id,
+                access_id: access_id,
+                editID: editID_global
+            },
+            type: "Post",
+            dataType: "Json",
+            success: function(result) {
+                eval(result.Script);
+                LoadHostList('Default');
+
+            },
+            error: function() {
+                alert("Error");
+            }
+        });
+    }
+
+    function AddNewItem() {
+        
+        $.ajax({
+            url: "/Sales/AddNewItem",
+            data: {
+                product_name: document.getElementById("product_name").value,
+                category: document.getElementById("category").value,
+                quantity: document.getElementById("quantity").value
+                
+            },
+            type: "Post",
+            dataType: "Json",
+            success: function(result) {
+                eval(result.Script);
+                LoadSalesList('Default');
+
+            },
+            error: function() {
+                alert("Error");
+            }
+        });
+
+    }
+</script>
+
+
+
+
+
+
+
+
+
