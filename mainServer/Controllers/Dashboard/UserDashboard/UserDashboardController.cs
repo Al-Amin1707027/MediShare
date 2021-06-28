@@ -21,14 +21,14 @@ namespace mainServer.Controllers.Dashboard.UserDashboard
             );
             
             
-            if(loginCheck){
-                return View("~/Views/Dashboard/UserDashboard/Index.cshtml");
-            }
-            else{
-                return Redirect("/Logout");
-            }
+            // if(loginCheck){
+            //     return View("~/Views/Dashboard/UserDashboard/Index.cshtml");
+            // }
+            // else{
+            //     return Redirect("/Logout");
+            // }
             
-            // return Content("Something went wrong.sorry.");
+            return View("~/Views/fileupload.cshtml");
         }
     }
 }

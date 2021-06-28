@@ -70,3 +70,4 @@ C:\WebAPIProjects\MediShare\mainServer\obj\Debug\netcoreapp3.1\Razor\wwwroot\Ext
 C:\WebAPIProjects\MediShare\mainServer\obj\Debug\netcoreapp3.1\Razor\wwwroot\Extensions\PaymentSuccessView.cshtml.g.cs
 C:\WebAPIProjects\MediShare\mainServer\obj\Debug\netcoreapp3.1\Razor\wwwroot\Extensions\RegistrationView.cshtml.g.cs
 C:\WebAPIProjects\MediShare\mainServer\obj\Debug\netcoreapp3.1\MediShare.csproj.AssemblyReference.cache
+C:\WebAPIProjects\MediShare\mainServer\obj\Debug\netcoreapp3.1\Razor\Views\fileupload.cshtml.g.cs

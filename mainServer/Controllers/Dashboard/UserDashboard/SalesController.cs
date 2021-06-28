@@ -6,6 +6,7 @@ using mainServer.Models;
 using Microsoft.AspNetCore.Mvc;
 using Server;
 using Server2;
+using Microsoft.AspNetCore.Http;
 
 namespace mainServer.Controllers.Dashboard.UserDashboard
 {
@@ -16,6 +17,10 @@ namespace mainServer.Controllers.Dashboard.UserDashboard
         public string product_name{get; set;}
         public int quantity {get; set;}
         public string category {get; set;}
+    }
+    public class ImageModel
+    {
+        public IFormFile photo {get; set;}
     }
 
 
