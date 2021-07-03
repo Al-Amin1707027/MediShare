@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Server;
 using Server2;
 using Microsoft.AspNetCore.Http;
+using System.IO;
 
 namespace mainServer.Controllers.Dashboard.UserDashboard
 {
@@ -28,6 +29,8 @@ namespace mainServer.Controllers.Dashboard.UserDashboard
     {
         public async  Task<ActionResult<List<ProductModel>>> GetSalesList(string pool,int offset_sales,int perPageCount_sales)
         {
+
+            //keep in mind user_shop_id = user_id
 
             string user_shop_id = GetUserID();
 
@@ -74,14 +77,93 @@ namespace mainServer.Controllers.Dashboard.UserDashboard
             return res;
         }
 
-        public async Task<IActionResult> AddNewItem(string product_name, string category, string quantity)
+        // public async Task<IActionResult> AddNewItem(string product_name, string category, string quantity)
+        // {
+
+
+        //     string user_id = GetUserID();
+        //     int quantity_int = Convert.ToInt32(quantity);
+
+        //     Console.WriteLine(quantity_int.GetType() + "   : "+ quantity_int);
+
+
+        //     var item_data = await DAL.ExecuteNonQueryAsync(
+        //         @"INSERT INTO product_list (
+        //             product_id,
+        //             product_name,
+        //             category,
+        //             quantity,
+        //             upload_date,
+        //             number_of_orders,
+        //             status,
+        //             user_shop_id
+        //         )
+        //         VALUES ( 
+        //             @product_id, 
+        //             @product_name,
+        //             @category,
+        //             "+quantity_int+@",
+        //             @upload_date,
+        //             "+ 0 +@",
+        //             @status,
+        //             @user_shop_id)",
+        //         new string[,]{
+        //             {"@product_id", FAuth.GenerateID(12)},
+        //             {"@product_name", product_name},
+        //             {"@category", category },
+        //             {"@upload_date", MySqlUtility.ConvertTo_MySqlDate(DateTime.Now)},
+        //             {"@status", "pending"},
+        //             {"@user_shop_id",user_id}
+        //         }
+        //     );
+
+        //     return Ok(200);
+        // }
+
+
+
+        public async Task<IActionResult> UploadFile(string product_name, string category, int quantity,int per_unit_price,string remark,IFormFile file)
         {
+            
+            
+            Console.WriteLine(product_name);
+            Console.WriteLine(category);
+            Console.WriteLine(quantity);
+            Console.WriteLine(per_unit_price);
+            
+            bool isSaveSuccess = false;
+            string fileName = "";
+
+            try{
+                var extension = "." + file.FileName.Split('.')[file.FileName.Split('.').Length - 1];
+                fileName = DateTime.Now.Ticks + extension;
+                Console.WriteLine(fileName);
+
+                var pathBuilt = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\Product_Images");
+
+                if(!Directory.Exists(pathBuilt)){
+                    Directory.CreateDirectory(pathBuilt);
+                }
+
+                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\Product_Images",fileName);
+
+                using (var stream = new FileStream(path, FileMode.Create))
+                {
+                    await file.CopyToAsync(stream);
+                }
+                
+                Console.WriteLine("file is uploading.......");
+                
+                isSaveSuccess = true;
+            }
+            catch (Exception e)
+            {
+                // Console.Writeline(e);
+            }
+
 
 
             string user_id = GetUserID();
-            int quantity_int = Convert.ToInt32(quantity);
-
-            Console.WriteLine(quantity_int.GetType() + "   : "+ quantity_int);
 
 
             var item_data = await DAL.ExecuteNonQueryAsync(
@@ -93,28 +175,36 @@ namespace mainServer.Controllers.Dashboard.UserDashboard
                     upload_date,
                     number_of_orders,
                     status,
-                    user_shop_id
+                    user_shop_id,
+                    per_unit_price,
+                    remark,
+                    file_name
                 )
                 VALUES ( 
                     @product_id, 
                     @product_name,
                     @category,
-                    "+quantity_int+@",
+                    "+quantity+@",
                     @upload_date,
                     "+ 0 +@",
                     @status,
-                    @user_shop_id)",
+                    @user_shop_id,
+                    "+per_unit_price+@",
+                    @remark,
+                    @file_name)",
                 new string[,]{
                     {"@product_id", FAuth.GenerateID(12)},
                     {"@product_name", product_name},
                     {"@category", category },
                     {"@upload_date", MySqlUtility.ConvertTo_MySqlDate(DateTime.Now)},
                     {"@status", "pending"},
-                    {"@user_shop_id",user_id}
+                    {"@user_shop_id",user_id},
+                    {"@remark",remark},
+                    {"@file_name", fileName}
                 }
             );
 
-            return Ok(200);
+            return Redirect("~/userdashboard");
         }
     }
 }

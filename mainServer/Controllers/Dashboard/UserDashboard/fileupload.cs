@@ -1,25 +1,56 @@
+using System;
+using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
+using System.Threading.Tasks;
+using System.IO;
+
+
 namespace mainServer.Controllers.Dashboard.UserDashboard
 {
-        public async Task<IActionResult> OnPostUploadAsync(List<IFormFile> files)
+    public class fileupload : Controller
+    {
+
+
+        public IActionResult Index()
         {
-            long size = files.Sum(f => f.Length);
+            return View("~/Views/fileupload.cshtml");
+        }
 
-            foreach (var formFile in files)
-            {
-                if (formFile.Length > 0)
-                {
-                    var filePath = Path.GetTempFileName();
 
-                    using (var stream = System.IO.File.Create(filePath))
-                    {
-                        await formFile.CopyToAsync(stream);
-                    }
+
+        public async Task<bool> UploadFile(IFormFile file)
+        {
+            bool isSaveSuccess = false;
+            string fileName;
+
+            try{
+                var extension = "." + file.FileName.Split('.')[file.FileName.Split('.').Length - 1];
+                fileName = DateTime.Now.Ticks + extension;
+
+                var pathBuilt = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\images");
+
+                if(!Directory.Exists(pathBuilt)){
+                    Directory.CreateDirectory(pathBuilt);
                 }
+
+                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\images",fileName);
+
+                using (var stream = new FileStream(path, FileMode.Create))
+                {
+                    await file.CopyToAsync(stream);
+                }
+                
+                Console.WriteLine("file is uploading.......");
+                
+                isSaveSuccess = true;
+            }
+            catch (Exception e)
+            {
+                // Console.Writeline(e);
             }
 
-            // Process uploaded files
-            // Don't rely on or trust the FileName property without validation.
-
-            return Ok(new { count = files.Count, size });
+            return isSaveSuccess;
         }
+    }
 }

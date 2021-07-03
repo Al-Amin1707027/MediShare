@@ -18,44 +18,71 @@
             </button>
 
 
-            <div class="modal fade" id="modal-default">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title">Enter New Item Data</h4>
-                        </div>
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <label for="pkgnm">Product Name</label>
-                                <input type="text" id="product_name" class="form-control" id="pkgnm" placeholder="Enter package name">
+
+            <form enctype="multipart/form-data" action="Sales/UploadFile" method="post">
+                <div class="modal fade" id="modal-default">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title">Enter New Item Data</h4>
                             </div>
-                            <div class="form-group">
-                                <label for="comb1">Category</label>
-                                <input list=units id="category" name="unit" class="form-control">
-                                    <datalist id=units>
-                                        <option value="Heart Drugs"></option>
-                                        <option value="Everyday Drugs"></option>
-                                        <option value="Other Drugs"></option>
-                                        <option value="Medical Equipments"></option>
-                                    </datalist>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label for="pkgnm">Product Name</label>
+                                    <input type="text" name="product_name" class="form-control" id="pkgnm" placeholder="Enter package name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="comb1">Category</label>
+                                    <input list=units name="category" name="unit" class="form-control">
+                                        <datalist id=units>
+                                            <option value="Heart Drugs"></option>
+                                            <option value="Everyday Drugs"></option>
+                                            <option value="Other Drugs"></option>
+                                            <option value="Medical Equipments"></option>
+                                        </datalist>
+                                </div>
+                                <div class="form-group">
+                                    <label for="pkgnm">Quantity</label>
+                                    <input type="text" name="quantity" class="form-control" id="pkgnnm" placeholder="Enter package price">
+                                </div>
+                                <div class="form-group">
+                                    <label for="pkgnm">Per Unit Price</label>
+                                    <input type="text" name="per_unit_price" class="form-control" id="pkgnnm" placeholder="Enter package price">
+                                </div>
+                                <div class="form-group">
+                                    <label for="comb1">Remark</label>
+                                    <input list=units name="remark" name="unit" class="form-control">
+                                        <datalist id=units>
+                                            <option value="sale"></option>
+                                            <option value="donate"></option>
+                                        </datalist>
+                                </div>
+                                <div>
+                                    <dl>
+                                        <dt>
+                                            <label asp-for="FileUpload.FormFile"></label>
+                                        </dt>
+                                        <dd>
+                                            <input asp-for="FileUpload.FormFile" type="file" name="file">
+                                            <span asp-validation-for="FileUpload.FormFile"></span>
+                                        </dd>
+                                    </dl>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="pkgnm">Quantity</label>
-                                <input type="text" id="quantity" class="form-control" id="pkgnnm" placeholder="Enter package price">
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                                <!-- <button type="button" onclick="AddNewItem()" class="btn btn-primary" data-dismiss="modal">Add Item</button> -->
+                                <button type="submit" class="btn btn-default pull-left">Add Item</button>
                             </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-                            <button type="button" onclick="AddNewItem()" class="btn btn-primary" data-dismiss="modal">Save changes</button>
                         </div>
                     </div>
-                    <!-- /.modal-content -->
                 </div>
-                <!-- /.modal-dialog -->
-            </div>
-            <!-- /.modal -->
+            </form>
+
+            
+          
 
 
 
@@ -141,31 +168,6 @@
         <!-- /.col -->
     </div>
     <!-- /.row -->
-
-
-    <form enctype="multipart/form-data" action="">
-        <div class="form-group row">
-            <label asp-for="photo"  class="col-sm-2 col-form-label"></label>
-            <div class="col-sm-10">
-                <div class="custom-file">
-                    <input asp-for = "photo" class="form-control custom-file-input">
-                    <label class="custom-file-label">Choose File.......</label>
-                </div>
-            </div>
-        </div>
-    </form>
-
-
-    
-
-
-
-
-
-
-
-
-
 
 
 
@@ -254,7 +256,8 @@
                         $('<th>').text('Status'),
                         $('<th>').text('Upload Date'),
                         $('<th>').text('Image Name'),
-                        $('<th>').text('Number of orders')
+                        $('<th>').text('Number of orders'),
+                        $('<th>').text('Per Unit Price')
                     )
                 );
 
