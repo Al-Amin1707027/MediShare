@@ -19,10 +19,6 @@ namespace mainServer.Controllers.Dashboard.UserDashboard
         public int quantity {get; set;}
         public string category {get; set;}
     }
-    public class ImageModel
-    {
-        public IFormFile photo {get; set;}
-    }
 
 
     public class SalesController : BaseController
@@ -38,7 +34,7 @@ namespace mainServer.Controllers.Dashboard.UserDashboard
                 var res_refresh = await DAL.ExecuteReaderAsync<ProductModel>(
                     @"SELECT product_id,product_name,category,
                     quantity,upload_date,number_of_orders,
-                    status,user_shop_id
+                    status,user_shop_id,per_unit_price
                     FROM product_list WHERE user_shop_id = @user_shop_id
                     LIMIT "+offset_sales+", "+perPageCount_sales+@" 
                     ",
@@ -56,7 +52,7 @@ namespace mainServer.Controllers.Dashboard.UserDashboard
             var res = await DAL.ExecuteReaderAsync<ProductModel>(
                 @"SELECT product_id,product_name,category,
                     quantity,upload_date,number_of_orders,
-                    status,user_shop_id
+                    status,user_shop_id,per_unit_price,file_name
                     FROM product_list WHERE user_shop_id = @user_shop_id
                     LIMIT "+offset_sales+", "+perPageCount_sales+@" 
                     ",
@@ -77,49 +73,6 @@ namespace mainServer.Controllers.Dashboard.UserDashboard
             return res;
         }
 
-        // public async Task<IActionResult> AddNewItem(string product_name, string category, string quantity)
-        // {
-
-
-        //     string user_id = GetUserID();
-        //     int quantity_int = Convert.ToInt32(quantity);
-
-        //     Console.WriteLine(quantity_int.GetType() + "   : "+ quantity_int);
-
-
-        //     var item_data = await DAL.ExecuteNonQueryAsync(
-        //         @"INSERT INTO product_list (
-        //             product_id,
-        //             product_name,
-        //             category,
-        //             quantity,
-        //             upload_date,
-        //             number_of_orders,
-        //             status,
-        //             user_shop_id
-        //         )
-        //         VALUES ( 
-        //             @product_id, 
-        //             @product_name,
-        //             @category,
-        //             "+quantity_int+@",
-        //             @upload_date,
-        //             "+ 0 +@",
-        //             @status,
-        //             @user_shop_id)",
-        //         new string[,]{
-        //             {"@product_id", FAuth.GenerateID(12)},
-        //             {"@product_name", product_name},
-        //             {"@category", category },
-        //             {"@upload_date", MySqlUtility.ConvertTo_MySqlDate(DateTime.Now)},
-        //             {"@status", "pending"},
-        //             {"@user_shop_id",user_id}
-        //         }
-        //     );
-
-        //     return Ok(200);
-        // }
-
 
 
         public async Task<IActionResult> UploadFile(string product_name, string category, int quantity,int per_unit_price,string remark,IFormFile file)
@@ -139,13 +92,13 @@ namespace mainServer.Controllers.Dashboard.UserDashboard
                 fileName = DateTime.Now.Ticks + extension;
                 Console.WriteLine(fileName);
 
-                var pathBuilt = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\Product_Images");
+                var pathBuilt = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\ProductImages");
 
                 if(!Directory.Exists(pathBuilt)){
                     Directory.CreateDirectory(pathBuilt);
                 }
 
-                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\Product_Images",fileName);
+                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\ProductImages",fileName);
 
                 using (var stream = new FileStream(path, FileMode.Create))
                 {

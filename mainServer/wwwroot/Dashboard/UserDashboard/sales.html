@@ -12,7 +12,7 @@
 <!-- Main content -->
 <section class="content">
     <div class="row">
-        <div class="col-md-1">
+        <div class="col-md-2">
             <button type="button" class="btn btn-primary btn-block margin-bottom" data-toggle="modal" data-target="#modal-default">
                 Add New Item
             </button>
@@ -53,7 +53,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="comb1">Remark</label>
-                                    <input list=units name="remark" name="unit" class="form-control">
+                                    <input list=units name="remark" class="form-control">
                                         <datalist id=units>
                                             <option value="sale"></option>
                                             <option value="donate"></option>
@@ -90,7 +90,7 @@
             <!-- /.box -->
         </div>
         <!-- /.col -->
-        <div class="col-md-11">
+        <div class="col-md-10">
             <div class="box box-primary">
                 <div class="box-header with-border">
                     <h3 class="box-title">Product Table</h3>
@@ -120,8 +120,8 @@
                         <div class="pull-right">
                             <!-- 1-50/200 -->
                             <div class="btn-group">
-                                <button type="button" onclick="LoadHostList('back_button')" onclick="" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
-                                <button type="button" onclick="LoadHostList('Default')" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
+                                <button type="button" onclick="LoadSalesList('back_button')" onclick="" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
+                                <button type="button" onclick="LoadSalesList('Default')" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
                             </div>
                             <!-- /.btn-group -->
                         </div>
@@ -154,8 +154,8 @@
                         <div class="pull-right">
                             <!-- 1-50/200 -->
                             <div class="btn-group">
-                                <button type="button" onclick="LoadHostList('back_button')" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
-                                <button type="button" onclick="LoadHostList('Default')" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
+                                <button type="button" onclick="LoadSalesList('back_button')" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
+                                <button type="button" onclick="LoadSalesList('Default')" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
                             </div>
                             <!-- /.btn-group -->
                         </div>
@@ -249,15 +249,14 @@
                 sales.append(
                     $('<tr>').append(
                         $('<th>').text('Serial No.'),
-                        $('<th>').text('Product Id'),
                         $('<th>').text('Product Name'),
                         $('<th>').text('Category'),
                         $('<th>').text('Quantity'),
                         $('<th>').text('Status'),
                         $('<th>').text('Upload Date'),
-                        $('<th>').text('Image Name'),
                         $('<th>').text('Number of orders'),
-                        $('<th>').text('Per Unit Price')
+                        $('<th>').text('Per Unit Price'),
+                        $('<th>').text('Action')
                     )
                 );
 
@@ -269,13 +268,13 @@
                         chck = true;
                         $('<tr>').append(
                             $('<td class="mailbox-name">').text(serial_no),
-                            $('<td class="mailbox-name">').text(item.product_id),
                             $('<td class="mailbox-name">').text(item.product_name),
                             $('<td class="mailbox-name">').text(item.category),
                             $('<td class="mailbox-name">').text(item.quantity),
                             $('<td class="mailbox-name">').text(item.status),
                             $('<td class="mailbox-name">').text(item.upload_date),
-                            $('<td class="mailbox-name">').text(item.number_of_orders),
+                            $('<td class="mailbox-name">').text("       "+item.number_of_orders),
+                            $('<td class="mailbox-name">').text("     "+item.per_unit_price),
                             //$('<button type="button" class="btn btn-default btn-sm" onclick="SendDeleteID(hello)"><i class="fa fa-trash-o">'),
                             //$('<a data-id="' + item.host_id_external + '" href="#" class="linkdelete"><i class="fa fa-trash-o">'),
                             //$('<a data-id="Hello890" href="#" class="linkdelete"><i class="fa fa-edit">'),
