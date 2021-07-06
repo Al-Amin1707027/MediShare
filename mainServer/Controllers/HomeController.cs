@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Server;
 using System.Collections.Generic;
 using mainServer.Models;
+using mainServer.Controllers;
 
 namespace MediShare.Controllers
 {
@@ -14,12 +15,13 @@ namespace MediShare.Controllers
 
 
         public IActionResult Index(){
+            
 
             string email = GetUserEMAIL();
+            
 
-            LoginModel loginModel = new LoginModel();
+            LoginandProductPage loginModel = new LoginandProductPage();
             loginModel.email = email;
-
             if(email == null) loginModel.password = "n";
 
 
@@ -43,6 +45,24 @@ namespace MediShare.Controllers
                 // if(res.Count == 0){
                 //     return Ok
                 // }
+
+                return res;
+        }
+        
+
+
+        public async Task<ActionResult<List<ProductModel>>> SuggestedProducts()
+        {
+                var res = await DAL.ExecuteReaderAsync<ProductModel>(
+                    @"SELECT product_id,product_name,category,
+                    quantity,upload_date,number_of_orders,
+                    status,user_shop_id,per_unit_price,file_name
+                    FROM product_list LIMIT "+0+", "+3+@"
+                    ",
+                    new string[,]{
+
+                    }
+                );
 
                 return res;
         }

@@ -84,7 +84,6 @@ namespace mainServer.Controllers.Dashboard.UserDashboard
             Console.WriteLine(quantity);
             Console.WriteLine(per_unit_price);
             
-            bool isSaveSuccess = false;
             string fileName = "";
 
             try{
@@ -106,12 +105,10 @@ namespace mainServer.Controllers.Dashboard.UserDashboard
                 }
                 
                 Console.WriteLine("file is uploading.......");
-                
-                isSaveSuccess = true;
             }
             catch (Exception e)
             {
-                // Console.Writeline(e);
+                Console.WriteLine(e);
             }
 
 
