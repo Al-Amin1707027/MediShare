@@ -72,3 +72,4 @@ C:\WebAPIProjects\MediShare\mainServer\obj\Debug\netcoreapp3.1\Razor\wwwroot\Ext
 C:\WebAPIProjects\MediShare\mainServer\obj\Debug\netcoreapp3.1\MediShare.csproj.AssemblyReference.cache
 C:\WebAPIProjects\MediShare\mainServer\obj\Debug\netcoreapp3.1\Razor\Extra\fileupload.cshtml.g.cs
 C:\WebAPIProjects\MediShare\mainServer\obj\Debug\netcoreapp3.1\Razor\Views\HomePage\ProductPage.cshtml.g.cs
+C:\WebAPIProjects\MediShare\mainServer\obj\Debug\netcoreapp3.1\Razor\Views\HomePage\CartPage.cshtml.g.cs

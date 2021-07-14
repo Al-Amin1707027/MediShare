@@ -11,7 +11,7 @@
                     <div >
                         @{
                             var file_path = "ProductImages/" + Model.file_name;
-                            <img style="border: 3px solid #555;" src="@file_path" height="400" width="400" alt="...">
+                            <img style="border: 3px solid #555;" src="@file_path" height="300" width="400" alt="...">
                         }
                     </div>
             </div>
@@ -20,7 +20,8 @@
                 <p style="" class="newarrival text-centre">NEW</p>
                 <h2>@Model.product_name</h2>
                 <p class="price">৳@Model.per_unit_price</p>
-                <a  class="btn btn-outline-secondary" href="Payment/DemoPayment2?product_id=@Model.product_id" >Buy Now</a>
+                <a  class="btn btn-outline-secondary" >Buy Now</a>
+                @* href="Payment/DemoPayment2?product_id=@Model.product_id" *@
                 <a  class="btn btn-outline-secondary" onclick="PackageDetails(\'' + item.package_name + '\')">Add to Cart</a>
             </div>
         </div>
@@ -41,11 +42,8 @@
 
 
 
-<script
-          src="https://code.jquery.com/jquery-3.4.1.min.js"
-          integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-          crossorigin="anonymous"></script>
-
+@* jquery link(mainly for ajax) *@
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 
 <script>
     
@@ -71,12 +69,12 @@
                     
                     $('<div class="col-lg-2 col-md-4 mb-2">').append(
                         $('<div class="card h-60">').append(
-                            $('<a href="#!"><img class="card-img-top" src='+ file_path +' width="200" height="100" alt="..." />'),
+                            $('<a href="#!"><img class="card-img-top" src='+ file_path +' width="150" height="70" alt="..." />'),
                             $('<div class="card-body">').append(
                                 $('<a href="/ProductPage">').text(item.product_name),
                                 $('<h5>').text("৳"+item.per_unit_price+".00"),
                                 $('<a  class="btn btn-outline-secondary" onclick="PackageDetails(\'' + item.package_name + '\')">').text('Add To Cart'),
-                                $('<a  class="btn btn-outline-secondary" onclick="PackageDetails(\'' + item.package_name + '\')">').text('Buy Now')
+                                $('<a  class="btn btn-outline-secondary" onclick="BuyNow(\'' + item.product_id + '\')">').text('Buy Now')
                             )
                         )
                      ).appendTo(card_container);
@@ -88,6 +86,65 @@
                 alert(response);
             }
         });
+    }
+
+    class ProductInfo{
+        
+        constructor(product_id, quantity) {
+            this.product_id = product_id;
+            this.quantity = quantity;
+        }
+    }
+    @* onclick="BuyNow('@Model.product_id')" *@
+    BuyNow("hsgsgsgsgsg");
+    function BuyNow(product_id){
+
+        
+        var product_info = new ProductInfo(product_id,1);
+        var product_info2 = new ProductInfo("JHSYEBORH*#HDF",5);
+        var product_info_array = [];
+        product_info_array.push(product_info);
+        product_info_array.push(product_info2);
+
+        
+        
+        @* product_info = [];
+        product_quantity = [];
+        product_quantity.push("1");
+        product_quantity.push("1");
+        product_info.push(product_id);
+        product_info.push(product_id);
+        console.log(product_quantity);
+        console.log(product_quantity[0]); *@
+
+
+        @* Product_Info product_info = new Product_Info();
+        var theIds = JSON.stringify(product_info);
+        var theIds2 = JSON.stringify(product_quantity); *@
+
+        var theIds = JSON.stringify(product_info_array);
+        console.log(theIds);
+
+        
+
+        $.ajax ({
+            type: "POST",
+            url: "/Payment/DemoPayment2", 
+            contentType: "application/json; charset=utf-8",
+            data: theIds,
+            dataType: "json",
+            success: function (result) {
+                alert('Yay! It worked!');               
+            },
+            error: function (result) {
+                alert('Oh no :(');
+            }
+        });
+
+
+        
+
+
     }
 
 </script>

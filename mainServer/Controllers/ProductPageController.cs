@@ -37,6 +37,10 @@ namespace mainServer.Controllers
                     }
                 );
             
+            if(res.Count == 0){
+                return Redirect("~/");
+            }
+            
             LoginandProductPage loginModel = new LoginandProductPage();
             loginModel.email = email;
             if(email == null) loginModel.password = "n";
