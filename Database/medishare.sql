@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.25, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.25, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: MediShare_DB
+-- Host: 127.0.0.1    Database: medishare
 -- ------------------------------------------------------
--- Server version	8.0.25-0ubuntu0.20.04.1
+-- Server version	8.0.25
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -14,6 +14,33 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `orders`
+--
+
+DROP TABLE IF EXISTS `orders`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `orders` (
+  `product_id` varchar(500) NOT NULL,
+  `product_name` varchar(45) DEFAULT NULL,
+  `quantity` int DEFAULT NULL,
+  `category` varchar(45) DEFAULT NULL,
+  `status` varchar(45) DEFAULT NULL,
+  `order_date` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`product_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `orders`
+--
+
+LOCK TABLES `orders` WRITE;
+/*!40000 ALTER TABLE `orders` DISABLE KEYS */;
+/*!40000 ALTER TABLE `orders` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `product_list`
@@ -31,6 +58,9 @@ CREATE TABLE `product_list` (
   `number_of_orders` int DEFAULT NULL,
   `status` varchar(45) DEFAULT NULL,
   `user_shop_id` varchar(45) NOT NULL,
+  `per_unit_price` int DEFAULT NULL,
+  `remark` varchar(20) DEFAULT NULL,
+  `file_name` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`product_id`,`user_shop_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -41,7 +71,7 @@ CREATE TABLE `product_list` (
 
 LOCK TABLES `product_list` WRITE;
 /*!40000 ALTER TABLE `product_list` DISABLE KEYS */;
-INSERT INTO `product_list` VALUES ('6e0kq3716ihb','Napa Plus','Everyday Drugs',10,'2021-05-22 00:55:24',0,'pending','CfLyRZmVdstrrK8Y'),('i10GKkMQLT6G','Ace Plus','Everyday Drugs',30,'2021-05-22 01:20:45',0,'pending','CfLyRZmVdstrrK8Y'),('i10GKkMQLT6Ge','Ace Plus','Everyday Drugs',NULL,'2021-05-22 01:20:45',0,'pending','CfLyRZmVdstrrK8YAAA');
+INSERT INTO `product_list` VALUES ('bQOLG7R5E0zM','napa extra','Everyday Drugs',30,'2021-07-04 13:25:51',0,'pending','P5AsDj3gKgTfQXwq',1,'sale','637610019515155295.jpg'),('bvabreO8Vrfk','Ace Plus','Everyday Drugs',10,'2021-07-04 14:07:19',0,'pending','P5AsDj3gKgTfQXwq',4,'sale','637610044390650975.jpg'),('miAY4F5vXfRR','Penicillin','Other Drugs',10,'2021-07-05 14:15:02',0,'pending','P5AsDj3gKgTfQXwq',135,'sale','637610913021718624.jpg'),('UBezsTjiO422','Antacid','Everyday Drugs',50,'2021-07-05 13:10:47',0,'pending','P5AsDj3gKgTfQXwq',3,'sale','637610874478512665.jpg'),('XbrAJF0UbCIT','Olmesan plus','Heart Drugs',199,'2021-07-04 14:09:26',0,'pending','P5AsDj3gKgTfQXwq',9,'sale','637610045666514817.jpg');
 /*!40000 ALTER TABLE `product_list` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -77,7 +107,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES ('34LDV3Ut2j0aAfPD','alaminbdgbtttt@gmail.com','saajshfgvashjfgajshfgb','saajshfgvashjfgajshfgb',NULL,'Abdullah','Al-Amin','no','l3cXTfw1lAIWQhmn','2021-05-20 13:04:40',NULL,NULL,NULL,'client'),('46tNnU2EOSSnODzP','sdadvvasd@gmail.com','$2b$12$ab5GqiiR3POLQgNmSTloj.uwcHMfnV27pq29lmgmswT5itrRDC4Jq','$2b$12$ab5GqiiR3POLQgNmSTloj.uwcHMfnV27pq29lmgmswT5itrRDC4Jq',NULL,'MD','Ratul','no','F0WIxfXcYY3abmJB','2021-02-16 23:13:47',NULL,NULL,NULL,'client'),('CfLyRZmVdstrrK8Y','alaminbdgbb@gmail.com','$2b$12$zrTYON54xVK3Tt5fqxphpeffbhz4Gj/fkqdyIjVenw/gSwTxY5omu','$2b$12$zrTYON54xVK3Tt5fqxphpeffbhz4Gj/fkqdyIjVenw/gSwTxY5omu',NULL,'Abdullah','Al-Amin','yes','mBLmTiUBo98BsVkU','2021-05-21 22:42:10',NULL,NULL,NULL,'client'),('JsWD4wmW4GYygn3H','sdadasd@gmail.com','$2b$12$IbE1FmMDp9pXIJAQjQeP7.VQHC9PVO.6IjWHMBikuj9lBmtvfGBTC','$2b$12$IbE1FmMDp9pXIJAQjQeP7.VQHC9PVO.6IjWHMBikuj9lBmtvfGBTC',NULL,'Abdul','Aziz','no','ebB3JGmQkYUNXJOh','2021-02-16 23:13:16',NULL,NULL,NULL,'client'),('OybzqNXbQoUzasYx','sdadasnnnnnd@gmail.com','$2b$12$0BIxEx9ULwMOeF9ufYy/j.sE9M40opfBGwXRbNLQIyTzm/barV9o.','$2b$12$0BIxEx9ULwMOeF9ufYy/j.sE9M40opfBGwXRbNLQIyTzm/barV9o.',NULL,'Abdullah','Al-Amina','no','JidVRhUp7fakrQNW','2021-02-16 23:24:58',NULL,NULL,NULL,'client'),('P5AsDj3gKgTfQXwq','alaminbdgb@gmail.com','$2b$12$87Tvq2nYKhMP6RNbL4JgLeUoCfgyZPde6CkzShCrf1actSa2sw3qC','$2b$12$87Tvq2nYKhMP6RNbL4JgLeUoCfgyZPde6CkzShCrf1actSa2sw3qC',NULL,'Abdullah','Al-Amin','yes','lApvc8cwT3UGym2y','2021-02-16 15:40:02',NULL,NULL,NULL,'admin'),('RyhUF84dVQnW6xa3','sdadvvfffasd@gmail.com','$2b$12$ubQTLaws9yudKaaFXmQlTOTspn5YlIBWPJZ6lz/PaABrdMQu3Y0TS','$2b$12$ubQTLaws9yudKaaFXmQlTOTspn5YlIBWPJZ6lz/PaABrdMQu3Y0TS',NULL,'MD','Ratul Br','no','7mtY3Cv4j2NN6CeT','2021-02-16 23:14:07',NULL,NULL,NULL,'client'),('S1TZcEuxFEO6BpGH','alamin1707027@outlook.com','$2b$12$NdhQKnb0/IUOKOTGJPcY8uAMzjVjL.fduviAxKoweFz5buCQunM6S','$2b$12$NdhQKnb0/IUOKOTGJPcY8uAMzjVjL.fduviAxKoweFz5buCQunM6S',NULL,'Abdullah','Al-Amin','no','ObpFRVTGxGq8OsK8','2021-05-21 14:25:53',NULL,NULL,NULL,'client');
+INSERT INTO `users` VALUES ('34LDV3Ut2j0aAfPD','alaminbdgbtttt@gmail.com','saajshfgvashjfgajshfgb','saajshfgvashjfgajshfgb',NULL,'Abdullah','Al-Amin','no','l3cXTfw1lAIWQhmn','2021-05-20 13:04:40',NULL,NULL,NULL,'client'),('46tNnU2EOSSnODzP','sdadvvasd@gmail.com','$2b$12$ab5GqiiR3POLQgNmSTloj.uwcHMfnV27pq29lmgmswT5itrRDC4Jq','$2b$12$ab5GqiiR3POLQgNmSTloj.uwcHMfnV27pq29lmgmswT5itrRDC4Jq',NULL,'MD','Ratul','no','F0WIxfXcYY3abmJB','2021-02-16 23:13:47',NULL,NULL,NULL,'client'),('b0cdGgDSoOQG8Pbq','alaminb7777dd7dgb@gmail.com','$2b$12$NUY0VUwwX1NpXdGBviT25uEvfwefgzZupOS3w2wGcjYwdNyoHioWq','$2b$12$NUY0VUwwX1NpXdGBviT25uEvfwefgzZupOS3w2wGcjYwdNyoHioWq',NULL,'Abdullah','Al-Amin','No','hvcO4zw5JMeu3N3Z','2021-06-25 20:45:40',NULL,NULL,NULL,'client'),('CfLyRZmVdstrrK8Y','alaminbdgbb@gmail.com','$2b$12$zrTYON54xVK3Tt5fqxphpeffbhz4Gj/fkqdyIjVenw/gSwTxY5omu','$2b$12$zrTYON54xVK3Tt5fqxphpeffbhz4Gj/fkqdyIjVenw/gSwTxY5omu',NULL,'Abdullah','Al-Amin','yes','mBLmTiUBo98BsVkU','2021-05-21 22:42:10',NULL,NULL,NULL,'client'),('ElmhmD8N4DCNxmOZ','alaminb77777dgb@gmail.com','$2b$12$iS24eVpqZDT/hjMakWleX.IZK8mIAed0e359wipDMhcXUPr6C0zKm','$2b$12$iS24eVpqZDT/hjMakWleX.IZK8mIAed0e359wipDMhcXUPr6C0zKm',NULL,'Abdullah','Al-Amin','No','wAVMvIFjTmFsIkOv','2021-06-25 20:43:41',NULL,NULL,NULL,'client'),('JsWD4wmW4GYygn3H','sdadasd@gmail.com','$2b$12$IbE1FmMDp9pXIJAQjQeP7.VQHC9PVO.6IjWHMBikuj9lBmtvfGBTC','$2b$12$IbE1FmMDp9pXIJAQjQeP7.VQHC9PVO.6IjWHMBikuj9lBmtvfGBTC',NULL,'Abdul','Aziz','no','ebB3JGmQkYUNXJOh','2021-02-16 23:13:16',NULL,NULL,NULL,'client'),('k6kKZ1oG2JuL7isQ','alaminbdghjk8655b@gmail.com','$2b$12$Y7WgzQhwSSz49vj5jhSA3.qVSB48X4R6oZ6pDizVCe2QugQhROWta','$2b$12$Y7WgzQhwSSz49vj5jhSA3.qVSB48X4R6oZ6pDizVCe2QugQhROWta',NULL,'Abdullah','Al-Amin','No','EtzjdEJKkvqfmnsE','2021-06-25 20:46:24',NULL,NULL,NULL,'client'),('nKrcJ19Lgn88exxb','alaminbtdgb@gmail.com','$2b$12$LoOP0O2O0EMRzZ3w20eSWOI4CIDCtwV/lsHdNcznsVjzEsvuBFVE6','$2b$12$LoOP0O2O0EMRzZ3w20eSWOI4CIDCtwV/lsHdNcznsVjzEsvuBFVE6',NULL,'Abdullah','Al-Amin','No','jBfhHolWtnadn0LI','2021-06-25 20:48:44',NULL,NULL,NULL,'client'),('OybzqNXbQoUzasYx','sdadasnnnnnd@gmail.com','$2b$12$0BIxEx9ULwMOeF9ufYy/j.sE9M40opfBGwXRbNLQIyTzm/barV9o.','$2b$12$0BIxEx9ULwMOeF9ufYy/j.sE9M40opfBGwXRbNLQIyTzm/barV9o.',NULL,'Abdullah','Al-Amina','no','JidVRhUp7fakrQNW','2021-02-16 23:24:58',NULL,NULL,NULL,'client'),('P5AsDj3gKgTfQXwq','alaminbdgb@gmail.com','$2b$12$87Tvq2nYKhMP6RNbL4JgLeUoCfgyZPde6CkzShCrf1actSa2sw3qC','$2b$12$87Tvq2nYKhMP6RNbL4JgLeUoCfgyZPde6CkzShCrf1actSa2sw3qC',NULL,'Abdullah','Al-Amin','yes','lApvc8cwT3UGym2y','2021-02-16 15:40:02',NULL,NULL,NULL,'admin'),('RyhUF84dVQnW6xa3','sdadvvfffasd@gmail.com','$2b$12$ubQTLaws9yudKaaFXmQlTOTspn5YlIBWPJZ6lz/PaABrdMQu3Y0TS','$2b$12$ubQTLaws9yudKaaFXmQlTOTspn5YlIBWPJZ6lz/PaABrdMQu3Y0TS',NULL,'MD','Ratul Br','no','7mtY3Cv4j2NN6CeT','2021-02-16 23:14:07',NULL,NULL,NULL,'client'),('S1TZcEuxFEO6BpGH','alamin1707027@outlook.com','$2b$12$NdhQKnb0/IUOKOTGJPcY8uAMzjVjL.fduviAxKoweFz5buCQunM6S','$2b$12$NdhQKnb0/IUOKOTGJPcY8uAMzjVjL.fduviAxKoweFz5buCQunM6S',NULL,'Abdullah','Al-Amin','no','ObpFRVTGxGq8OsK8','2021-05-21 14:25:53',NULL,NULL,NULL,'client'),('vMVO8CBrr8GQeqKQ','alaminbdgkkkkb@gmail.com','$2b$12$IVV1LuaGdXkFICxcXou5W.C8rFQmDrKU2PLeXWi.qhs.XSeT9pat.','$2b$12$IVV1LuaGdXkFICxcXou5W.C8rFQmDrKU2PLeXWi.qhs.XSeT9pat.',NULL,'Abdullah','Al-Amin','No','8PxrngLBccYdtAUo','2021-06-25 20:47:44',NULL,NULL,NULL,'client');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -90,4 +120,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-05-23 19:14:04
+-- Dump completed on 2021-07-14 14:26:26
