@@ -26,25 +26,29 @@ namespace mainServer.Controllers.Pages
         public int val_limit{get;set;}
     }
 
-    public class ProductInfo
+    public class BuyNoworAddtoCartModel
     {
         public string product_id {get; set;}
-        public int quantity {get; set;} 
+        public string user_id {get; set;}
+        public int price {get; set;}
+        public int  quantity {get; set;}
+        public string file_name {get; set;}
+        public string product_name {get; set;}
     }
 
 
     public class PaymentController : BaseController
     {
-        public async Task<IActionResult> DemoPayment2([FromBody]List<ProductInfo> pinfo)
+        public async Task<IActionResult> DemoPayment2(string product_id, string what)
         {
             
 
-            Console.WriteLine("this payment");
+            Console.WriteLine(product_id + what);
 
-            Console.WriteLine(pinfo[1].product_id);
+            
 
 
-
+            if(what == )
 
 
 
@@ -111,6 +115,44 @@ namespace mainServer.Controllers.Pages
 
             return Ok(200);
 
+        }
+
+
+        public async Task<IActionResult> BuyNoworAddtoCart(string product_id, string what, int quantity)
+        {
+            if(what == "buynow"){
+                var res = await DAL.ExecuteReaderAsync<ProductModel>(
+                    @"SELECT product_id,product_name,category,
+                    quantity,upload_date,number_of_orders,
+                    status,user_shop_id,per_unit_price,file_name
+                    FROM product_list WHERE product_id = @product_id 
+                    ",
+                    new string[,]{
+                        {"@product_id",  product_id}
+                    }
+                );
+                string user_id = GetUserID();
+
+                var ins = await DAL.ExecuteNonQueryAsync(
+                    @"INSERT INTO ",
+                    new string[,]{
+                        {}
+                    }
+                );
+
+
+                BuyNoworAddtoCartModel cartModel = new BuyNoworAddtoCartModel();
+                cartModel.product_name = res[0].product_name;
+                cartModel.quantity = quantity;
+                cartModel.file_name = res[0].file_name;
+                cartModel.price = (quantity * res[0].per_unit_price)
+
+                return cartModel;
+            }
+
+            else{
+                
+            }
         }
 
 

@@ -20,8 +20,11 @@
                 <p style="" class="newarrival text-centre">NEW</p>
                 <h2>@Model.product_name</h2>
                 <p class="price">৳@Model.per_unit_price</p>
-                <a  class="btn btn-outline-secondary" >Buy Now</a>
-                @* href="Payment/DemoPayment2?product_id=@Model.product_id" *@
+                <input type="number" value="1" style="width: 50px; height:40px; padding-left:10px; font-size:20px; margin-right:10px;border: 1px solid #ff523b; ">
+                <br>
+                <br>
+                <a class="btn btn-outline-secondary" onclick="BuyNow('@Model.product_id')">Buy Now</a>
+                @* href="Payment/DemoPayment2?product_id=@Model.product_id&what=buynow" *@
                 <a  class="btn btn-outline-secondary" onclick="PackageDetails(\'' + item.package_name + '\')">Add to Cart</a>
             </div>
         </div>
@@ -55,7 +58,6 @@
     SuggestedProducts();
 
     function SuggestedProducts(){
-        console.log("this is LoadProduct");
         
         $.ajax({
             type : "GET",
@@ -88,15 +90,33 @@
         });
     }
 
-    class ProductInfo{
+    function BuyNow(product_id){
+        var quantity
+    }
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+@* class ProductInfo{
         
         constructor(product_id, quantity) {
             this.product_id = product_id;
             this.quantity = quantity;
         }
     }
-    @* onclick="BuyNow('@Model.product_id')" *@
-    BuyNow("hsgsgsgsgsg");
+
     function BuyNow(product_id){
 
         
@@ -105,22 +125,6 @@
         var product_info_array = [];
         product_info_array.push(product_info);
         product_info_array.push(product_info2);
-
-        
-        
-        @* product_info = [];
-        product_quantity = [];
-        product_quantity.push("1");
-        product_quantity.push("1");
-        product_info.push(product_id);
-        product_info.push(product_id);
-        console.log(product_quantity);
-        console.log(product_quantity[0]); *@
-
-
-        @* Product_Info product_info = new Product_Info();
-        var theIds = JSON.stringify(product_info);
-        var theIds2 = JSON.stringify(product_quantity); *@
 
         var theIds = JSON.stringify(product_info_array);
         console.log(theIds);
@@ -142,12 +146,15 @@
         });
 
 
-        
+        c# code recieve this json data using following parmeter in the function
+        [FromBody]List<ProductInfo> pinfo
+        c#    model will be
+        public class ProductInfo
+            {
+                public string product_id {get; set;}
+                public int quantity {get; set;} 
+            }
 
-
-    }
-
-</script>
-
+    } *@
 
 
