@@ -5,19 +5,36 @@
 
  
 
-<div class="small-container" style="margin: 80px auto;">
-    <table style="width: 100%; border-collapse: collapse ">
-        <tr>
-            <th>Product</th>
-            <th>Quantity</th>
-            <th>Subtotal</th>
-        </tr>
-        <tr>
-            <td>Product name</td>
-            <td> <label for="quantity">1</label> </td>
-            <td>Product name</td>
-        </tr>
-    </table>
+<div class="small-container" style="margin-left: 50px auto;">
+    
+    
+    <div style="margin-left: 10px ; margin-right: 10px;">
+        <div class="table-responsive mailbox-messages">
+                        <table class="table table-hover table-striped">
+                            <tbody id="hosts">
+
+
+                            </tbody>
+                        </table>
+        </div>
+
+        <br>
+    
+        <div>
+            <a  class="btn btn-outline-danger" href="/Payment/ClearCart">Clear Cart</a>
+            <div style="justify-content: flex-end; display: flex; margin-right:200px;">
+                <P id="total_price"></P>
+            </div>
+        </div>
+        <div style=" display: flex; justify-content: flex-end; margin-right:200px;">
+            <p>Address:</p>
+            <br>
+            <p id="address"></p><br>
+            <a  class="btn btn-outline-secondary">Submit Order</a>
+        </div>
+    </div>
+
+    
 </div>
 
 
@@ -26,8 +43,57 @@
 @* jquery link(mainly for ajax) *@
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 
+
+
 <script>
-    
+
+
+
+LoadCart();
+function LoadCart(){
+
+    var totalprice = 0;
+    $.ajax({
+            type: "GET",
+            url: "/Payment/GetCartList",
+            success: function(response) {
+                var hosts = $("#hosts");
+                hosts.empty();
+
+                hosts.append(
+                    $('<tr>').append(
+                        $('<th>').text("            "),
+                        $('<th>').text('Product Name'),
+                        $('<th>').text('Quantity'),
+                        $('<th>').text('SubTotal')
+                    )
+                );
+
+
+                $.each(response, function(i, item) {
+                        var file_path = "ProductImages/" + item.file_name;
+                        $('<tr>').append(
+                            $('<td class="mailbox-name">').append(
+                                $('<img  src='+file_path+' height="70" width="70" alt="...">')
+                            ),
+                            $('<td class="mailbox-name">').text(item.product_name),
+                            $('<td class="mailbox-name">').text(item.quantity),
+                            $('<td class="mailbox-name">').text(item.price)
+
+                        ).appendTo(hosts);
+                        totalprice+=item.price;
+                    
+                });
+
+                document.getElementById('total_price').innerHTML = "Total Price :   "+totalprice;  
+            },
+
+            failure: function(response) {
+                alert(response);
+            }
+        });
+}
+
 
 </script>
 

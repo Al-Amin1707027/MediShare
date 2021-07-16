@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using Microsoft.AspNetCore.Http;
+using mainServer.Models;
 
 
 
@@ -43,12 +44,7 @@ namespace mainServer.Controllers.Pages
         {
             
 
-            Console.WriteLine(product_id + what);
-
             
-
-
-            if(what == )
 
 
 
@@ -118,10 +114,45 @@ namespace mainServer.Controllers.Pages
         }
 
 
-        public async Task<IActionResult> BuyNoworAddtoCart(string product_id, string what, int quantity)
+        public async Task<IActionResult> BuyNoworAddtoCart(string product_id, int quantity, string what)
         {
-            if(what == "buynow"){
-                var res = await DAL.ExecuteReaderAsync<ProductModel>(
+            // if(what == "buynow"){
+            //     var res = await DAL.ExecuteReaderAsync<ProductModel>(
+            //         @"SELECT product_id,product_name,category,
+            //         quantity,upload_date,number_of_orders,
+            //         status,user_shop_id,per_unit_price,file_name
+            //         FROM product_list WHERE product_id = @product_id 
+            //         ",
+            //         new string[,]{
+            //             {"@product_id",  product_id}
+            //         }
+            //     );
+            //     string user_id = GetUserID();
+
+            //     var ins = await DAL.ExecuteNonQueryAsync(
+            //         @"INSERT INTO ",
+            //         new string[,]{
+            //             {}
+            //         }
+            //     );
+
+
+            //     BuyNoworAddtoCartModel cartModel = new BuyNoworAddtoCartModel();
+            //     cartModel.product_name = res[0].product_name;
+            //     cartModel.quantity = quantity;
+            //     cartModel.file_name = res[0].file_name;
+            //     cartModel.price = (quantity * res[0].per_unit_price)
+
+            //     return cartModel;
+            // }
+
+            // else{
+                
+            // }
+
+            Console.WriteLine(product_id+"    "+quantity);
+            
+            var res = await DAL.ExecuteReaderAsync<ProductModel>(
                     @"SELECT product_id,product_name,category,
                     quantity,upload_date,number_of_orders,
                     status,user_shop_id,per_unit_price,file_name
@@ -130,29 +161,83 @@ namespace mainServer.Controllers.Pages
                     new string[,]{
                         {"@product_id",  product_id}
                     }
-                );
-                string user_id = GetUserID();
+            );
 
-                var ins = await DAL.ExecuteNonQueryAsync(
-                    @"INSERT INTO ",
-                    new string[,]{
-                        {}
-                    }
-                );
+            string user_id = GetUserID();
+            if(user_id == null){
+                return Redirect("/Login");
+            }
+            int price = (res[0].per_unit_price * quantity);
 
+            var ins = await DAL.ExecuteNonQueryAsync(
+                @"INSERT INTO cart 
+                (
+                    user_id,
+                    product_id,
+                    price,
+                    file_name,
+                    quantity,
+                    product_name
+                )
+                VALUES
+                (
+                    @user_id,
+                    @product_id,
+                    "+price+@",
+                    @file_name,
+                    "+quantity+@",
+                    @product_name
+                )",
+                new string[,]{
+                    {"@user_id", user_id },
+                    {"@product_id", res[0].product_id},
+                    {"@file_name", res[0].file_name},
+                    {"@product_name", res[0].product_name}
+                }
+            );
 
-                BuyNoworAddtoCartModel cartModel = new BuyNoworAddtoCartModel();
-                cartModel.product_name = res[0].product_name;
-                cartModel.quantity = quantity;
-                cartModel.file_name = res[0].file_name;
-                cartModel.price = (quantity * res[0].per_unit_price)
+            return Redirect("/ProductPage?product_id="+product_id);
 
-                return cartModel;
+        }
+
+        public async Task<ActionResult<List<BuyNoworAddtoCartModel>>> GetCartList()
+        {
+
+            string user_id = GetUserID();
+            if(user_id == null){
+                return Redirect("/Login");
             }
 
-            else{
-                
+            var res = await DAL.ExecuteReaderAsync<BuyNoworAddtoCartModel>(
+                @"SELECT product_name,quantity,price,product_id,file_name,user_id 
+                FROM cart WHERE user_id=@user_id",
+                new string[,]{
+                    {"@user_id", user_id}
+                }
+            );
+
+
+            return res;
+        }
+
+        
+        public async Task<IActionResult> ClearCart()
+        {
+
+            string user_id = GetUserID();
+            if(user_id == null){
+                return Redirect("/Login");
             }
+
+            var ins = await DAL.ExecuteNonQueryAsync(
+                @"DELETE FROM cart WHERE user_id=@user_id",
+                new string[,]{
+                    {"@user_id", user_id}
+                }
+            );
+
+
+            return Redirect("/Home");
         }
 
 

@@ -66,6 +66,29 @@ namespace MediShare.Controllers
 
                 return res;
         }
+
+        
+
+        public async Task<IActionResult> AddAddress(string street, string sadarupazilla,string district)
+        {
+                var fulladdress = street+"<br>"+sadarupazilla+"<br>"+district;
+
+                string user_id = GetUserID();
+                if(user_id == null){
+                    return Redirect("/Login");
+                }
+
+                var address = await DAL.ExecuteNonQueryAsync(
+                    @"UPDATE users SET user_address=@fulladdress 
+                    WHERE user_id=@user_id",
+                    new string[,]{
+                        {"@user_id", user_id},
+                        {"@fulladdress", fulladdress}
+                    }
+                );
+
+                return Redirect("/UserDashboard");
+        }
         
     }
 }

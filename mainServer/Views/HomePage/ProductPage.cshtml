@@ -20,12 +20,13 @@
                 <p style="" class="newarrival text-centre">NEW</p>
                 <h2>@Model.product_name</h2>
                 <p class="price">৳@Model.per_unit_price</p>
-                <input type="number" value="1" style="width: 50px; height:40px; padding-left:10px; font-size:20px; margin-right:10px;border: 1px solid #ff523b; ">
+                <input type="number" id="product_quantity" value="1" style="width: 50px; height:40px; padding-left:10px; font-size:20px; margin-right:10px;border: 1px solid #ff523b; ">
                 <br>
                 <br>
-                <a class="btn btn-outline-secondary" onclick="BuyNow('@Model.product_id')">Buy Now</a>
+                <button class="btn btn-outline-secondary" href="">Buy Now</button>
                 @* href="Payment/DemoPayment2?product_id=@Model.product_id&what=buynow" *@
-                <a  class="btn btn-outline-secondary" onclick="PackageDetails(\'' + item.package_name + '\')">Add to Cart</a>
+                <a  class="btn btn-outline-secondary" id="addtocart" onclick="AddtoCart('@Model.product_id')">Add to Cart</a>
+                @* onclick="PackageDetails(\'' + item.package_name + '\')" *@
             </div>
         </div>
         <br>
@@ -46,7 +47,9 @@
 
 
 @* jquery link(mainly for ajax) *@
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
 <script>
     
@@ -89,13 +92,40 @@
             }
         });
     }
+    @* var product_id = "";
+    function BuyNow2(p_id){
+        product_id = p_id;
+        
+    } *@
+
+
+    function AddtoCart(product_id){
+        var quantity = document.getElementById("product_quantity").value;
+        var a = document.getElementById('addtocart');
+        a.href = "/Payment/BuyNoworAddtoCart?product_id=" +product_id+"&quantity="+quantity+"&what=cart";
+    }
+
 
     function BuyNow(product_id){
-        var quantity
+        var quantity = document.getElementById("product_quantity").value;
+
+        $.ajax({
+            type: "Post",
+            url: "/Payment/BuyNoworAddtoCart?product_id=" +product_id+"&quantity="+quantity+"&what=cart",
+            success: function(result) {
+                console.log("cart icon chnage");
+              
+            },
+            failure: function() {
+                alert("something wrong!Sorry.");   
+            }
+        });
     }
 
 
 </script>
+
+
 
 
 
