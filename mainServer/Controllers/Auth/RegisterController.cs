@@ -52,7 +52,9 @@ namespace MediShare.Controllers.Auth
                         is_verified,
                         verify_code,
                         created,
-                        role
+                        role,
+                        phone,
+                        user_address
                     ) 
                     VALUES (
                         @user_id, 
@@ -64,7 +66,9 @@ namespace MediShare.Controllers.Auth
                         @is_verified,
                         @verify_code,
                         @created,
-                        'client'
+                        'client',
+                        'N/A',
+                        'N/A'
                     )",
                     new string[,] {
                         { "@user_id", user_id },
