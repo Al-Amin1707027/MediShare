@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using Microsoft.AspNetCore.Http;
 using mainServer.Models;
+using Payment;
 
 
 
@@ -36,119 +37,89 @@ namespace mainServer.Controllers.Pages
         public string file_name {get; set;}
         public string product_name {get; set;}
     }
+    
+
+    public class AddressModel
+    {
+        public string user_address {get; set;}
+        public string phone {get; set;}
+    }
 
 
     public class PaymentController : BaseController
     {
-        public async Task<IActionResult> DemoPayment2(string product_id, string what)
+        public async Task<IActionResult> DemoPayment2()
         {
-            
 
-            
+            string user_id = GetUserID();
+
+            if(user_id == null){
+                return Redirect(Keys.WebSiteDomain + "/Login");
+            }
+
+            var res = await DAL.ExecuteReaderAsync<BuyNoworAddtoCartModel>(
+                @"SELECT product_name,quantity,price,product_id,file_name,user_id 
+                FROM cart WHERE user_id=@user_id",
+                new string[,]{
+                    {"@user_id", user_id}
+                }
+            );
 
 
+            int TotalPrice = 0;
 
-            // string client_id = GetUserID();
-
-            // if(client_id == null){
-            //     return Redirect(Keys.WebSiteDomain + "/Login");
-            // }
-
-            // var res = await DAL.ExecuteReaderAsync<ProductModel>(
-            //         @"SELECT product_id,product_name,category,
-            //         quantity,upload_date,number_of_orders,
-            //         status,user_shop_id,per_unit_price,file_name
-            //         FROM product_list WHERE product_id = @product_id 
-            //         ",
-            //         new string[,]{
-            //             {"@product_id",  product_id}
-            //         }
-            //     );
-
-            // Console.WriteLine(packageDataPrice[0].price);
+            for(int i=0; i<res.Count; i++){
+                TotalPrice += res[i].price;
+            }
             
 
 
-            // NameValueCollection PostData = new NameValueCollection();
+            NameValueCollection PostData = new NameValueCollection();
 
-            // PostData.Add("total_amount", res[0].per_unit_price);
-            // PostData.Add("tran_id", "TESTASPNET1234");
-            // PostData.Add("success_url", Keys.WebSiteDomain+"/Payment/DemoPaymentSuccessResponse2");
-            // PostData.Add("fail_url", Keys.WebSiteDomain+"/Payment/DemoPaymentFailureResponse"); // "Fail.aspx" page needs to be created
-            // PostData.Add("cancel_url", Keys.WebSiteDomain+"/"); // "Cancel.aspx" page needs to be created
-            // PostData.Add("version", "3.00");
-            // PostData.Add("cus_name", "ABC XY");
-            // PostData.Add("cus_email", "abc.xyz@mail.co");
-            // PostData.Add("cus_add1", "Address Line On");
-            // PostData.Add("cus_add2", "Address Line Tw");
-            // PostData.Add("cus_city", "City Nam");
-            // PostData.Add("cus_state", "State Nam");
-            // PostData.Add("cus_postcode", "Post Cod");
-            // PostData.Add("cus_country", "Countr");
-            // PostData.Add("cus_phone", "0111111111");
-            // PostData.Add("cus_fax", "0171111111");
-            // PostData.Add("ship_name", "ABC XY");
-            // PostData.Add("ship_add1", "Address Line On");
-            // PostData.Add("ship_add2", "Address Line Tw");
-            // PostData.Add("ship_city", "City Nam");
-            // PostData.Add("ship_state", "State Nam");
-            // PostData.Add("ship_postcode", "Post Cod");
-            // PostData.Add("ship_country", "Countr");
-            // PostData.Add("value_a", product_id);
-            // PostData.Add("value_b", res[0].product_name);
-            // PostData.Add("value_c", res[0].per_unit_price);
-            // PostData.Add("value_d", res[0].category);
-            // PostData.Add("shipping_method", "NO");
-            // PostData.Add("num_of_item", "1");
-            // PostData.Add("product_name", plan);
-            // PostData.Add("product_profile", "general");
-            // PostData.Add("product_category", "Demo");
+            PostData.Add("total_amount", TotalPrice.ToString());
+            PostData.Add("tran_id", "TESTASPNET1234");
+            PostData.Add("success_url", Keys.WebSiteDomain+"/Payment/DemoPaymentSuccessResponse2");
+            PostData.Add("fail_url", Keys.WebSiteDomain+"/Payment/DemoPaymentFailureResponse"); // "Fail.aspx" page needs to be created
+            PostData.Add("cancel_url", Keys.WebSiteDomain+"/"); // "Cancel.aspx" page needs to be created
+            PostData.Add("version", "3.00");
+            PostData.Add("cus_name", "ABC XY");
+            PostData.Add("cus_email", "abc.xyz@mail.co");
+            PostData.Add("cus_add1", "Address Line On");
+            PostData.Add("cus_add2", "Address Line Tw");
+            PostData.Add("cus_city", "City Nam");
+            PostData.Add("cus_state", "State Nam");
+            PostData.Add("cus_postcode", "Post Cod");
+            PostData.Add("cus_country", "Countr");
+            PostData.Add("cus_phone", "0111111111");
+            PostData.Add("cus_fax", "0171111111");
+            PostData.Add("ship_name", "ABC XY");
+            PostData.Add("ship_add1", "Address Line On");
+            PostData.Add("ship_add2", "Address Line Tw");
+            PostData.Add("ship_city", "City Nam");
+            PostData.Add("ship_state", "State Nam");
+            PostData.Add("ship_postcode", "Post Cod");
+            PostData.Add("ship_country", "Countr");
+            PostData.Add("value_a", user_id);
+            PostData.Add("value_b", "sadasd");
+            PostData.Add("value_c", "shshshs");
+            PostData.Add("value_d", "aaaaaa");
+            PostData.Add("shipping_method", "NO");
+            PostData.Add("num_of_item", "1");
+            PostData.Add("product_name", "aaaa");
+            PostData.Add("product_profile", "general");
+            PostData.Add("product_category", "Demo");
 
-            // SSLCommerz sslcz = new SSLCommerz("openc604893a593fe6", "openc604893a593fe6@ssl", true);
-            // String response = sslcz.InitiateTransaction(PostData);
+            SSLCommerz sslcz = new SSLCommerz("openc604893a593fe6", "openc604893a593fe6@ssl", true);
+            String response = sslcz.InitiateTransaction(PostData);
 
-            // return Redirect(response);
-
-            return Ok(200);
+            return Redirect(response);
 
         }
 
 
         public async Task<IActionResult> BuyNoworAddtoCart(string product_id, int quantity, string what)
         {
-            // if(what == "buynow"){
-            //     var res = await DAL.ExecuteReaderAsync<ProductModel>(
-            //         @"SELECT product_id,product_name,category,
-            //         quantity,upload_date,number_of_orders,
-            //         status,user_shop_id,per_unit_price,file_name
-            //         FROM product_list WHERE product_id = @product_id 
-            //         ",
-            //         new string[,]{
-            //             {"@product_id",  product_id}
-            //         }
-            //     );
-            //     string user_id = GetUserID();
-
-            //     var ins = await DAL.ExecuteNonQueryAsync(
-            //         @"INSERT INTO ",
-            //         new string[,]{
-            //             {}
-            //         }
-            //     );
-
-
-            //     BuyNoworAddtoCartModel cartModel = new BuyNoworAddtoCartModel();
-            //     cartModel.product_name = res[0].product_name;
-            //     cartModel.quantity = quantity;
-            //     cartModel.file_name = res[0].file_name;
-            //     cartModel.price = (quantity * res[0].per_unit_price)
-
-            //     return cartModel;
-            // }
-
-            // else{
-                
-            // }
+            
 
             Console.WriteLine(product_id+"    "+quantity);
             
@@ -202,6 +173,7 @@ namespace mainServer.Controllers.Pages
 
         public async Task<ActionResult<List<BuyNoworAddtoCartModel>>> GetCartList()
         {
+            
 
             string user_id = GetUserID();
             if(user_id == null){
@@ -216,8 +188,28 @@ namespace mainServer.Controllers.Pages
                 }
             );
 
-
             return res;
+        }
+
+        public async Task<ActionResult<List<AddressModel>>> GetAddressandPhone()
+        {
+            
+
+            string user_id = GetUserID();
+            if(user_id == null){
+                return Redirect("/Login");
+            }
+
+            var addrss = await DAL.ExecuteReaderAsync<AddressModel>(
+                @"SELECT user_address,phone FROM users 
+                WHERE user_id=@user_id",
+                new string[,]{
+                    {"@user_id", user_id}
+                }
+            );
+
+            return addrss;
+
         }
 
         
@@ -243,91 +235,81 @@ namespace mainServer.Controllers.Pages
 
 
 
-        // public async Task<IActionResult> DemoPaymentSuccessResponse2(ValidatePaymentwithIPN checkerModel)
-        // {
+        public async Task<IActionResult> DemoPaymentSuccessResponse2(ValidatePaymentwithIPN checkerModel)
+        {
 
-        //     if(checkerModel.value_a == null) return Content("Error");
+            if(checkerModel.value_a == null) return Content("Error");
+
+            string user_id = checkerModel.value_a;
+
             
-        
-        
 
-        //     var packageData = await DAL.ExecuteReaderAsync<PackageModelSub>(
-        //         @"SELECT 
-        //         value,exp_time,auto_renew,package_id
-        //         FROM packages WHERE package_name=@package_name",
-        //         new string[,]{
-        //             {"@package_name", checkerModel.value_a}
-        //         }
-        //     );
- 
-            
-        
+            var ress = await DAL.ExecuteReaderAsync<BuyNoworAddtoCartModel>(
+                @"SELECT product_name,quantity,price,product_id,file_name,user_id 
+                FROM cart WHERE user_id=@user_id",
+                new string[,]{
+                    {"@user_id", user_id}
+                }
+            );
 
 
-        //     if(checkerModel.value_c == "new"){
-        //         bool res = await DAL.ExecuteNonQueryAsync(
-        //         @"INSERT INTO orders (
-        //             product_id,
-        //             product_name,
-        //             quantity,
-        //             category,
-        //             status,
-        //             order_date
-                    
-        //         ) 
-        //         VALUES(
-        //             @product_id,
-        //             @product_name,
-        //             @quantity,
-        //             @category,
-        //             @status,
-        //             @order_date
-                    
-        //         )
-        //         ",
-        //         new string[,]{
-        //             {"@project_id",project_id},
-        //             {"@project_name", checkerModel.value_b},
-        //             {"@client_id",checkerModel.value_d},
-        //             {"@start_date", MySqlUtility.ConvertTo_MySqlDate(DateTime.Now)},
-        //             {"@expire_date", MySqlUtility.ConvertTo_MySqlDate(answer)},
-        //             {"@validity", packageData[0].exp_time}
-        //         }
-        //         );
-        //     }
+            Console.WriteLine(ress[0].product_name);
 
 
-        //     Console.WriteLine("Payment Successful");
+            for(int i=0;i<ress.Count; i++){
+                Console.WriteLine(i);
 
-        //     Console.WriteLine(checkerModel.status);
-        //     Console.WriteLine(checkerModel.value_a);
-           
-
-        //     return View("~/wwwroot/Extensions/PaymentSuccessView.cshtml");
-        // }
-
-
-        // public IActionResult DemoPaymentFailureResponse()
-        // {
-        //     Console.WriteLine("Payment unsuccessful");
-
-        //     return View("~/wwwroot/Extensions/PaymentFailureView.cshtml");
-        // }
-
-        // public IActionResult DemoPayment3(string plan, string project_name,string what){
-        //     Console.WriteLine(plan);
-        //     Console.WriteLine(project_name);
-        //     Console.WriteLine(what);
-        //     return Content("ok");
-        // }
+                var ins2 = await DAL.ExecuteNonQueryAsync(
+                    @"INSERT INTO orders
+                    (
+                        product_id,
+                        product_name,
+                        quantity,
+                        status,
+                        order_date,
+                        user_id
+                    )
+                    VALUES
+                    (
+                        @product_id,
+                        @product_name,
+                        "+ress[0].quantity+@",
+                        @status,
+                        @order_date,
+                        @user_id
+                    )",
+                    new string[,]{
+                        {"@user_id", user_id},
+                        {"@product_id", ress[i].product_id},
+                        {"@product_name", ress[i].product_name},
+                        {"@status", "Payment Completed"},
+                        {"@order_date", MySqlUtility.ConvertTo_MySqlDate(DateTime.Now)}
+                    }
+                );
+            }
 
 
 
+            var inss = await DAL.ExecuteNonQueryAsync(
+                @"DELETE FROM cart WHERE user_id=@user_id",
+                new string[,]{
+                    {"@user_id", user_id}
+                }
+            );
+
+
+            return View("~/wwwroot/Extensions/PaymentSuccessView.cshtml");
+        }
+
+
+        public IActionResult DemoPaymentFailureResponse()
+        {
+            Console.WriteLine("Payment unsuccessful");
+
+            return View("~/wwwroot/Extensions/PaymentFailureView.cshtml");
+        }
 
     }
-
-
-
 
 
 
@@ -370,151 +352,3 @@ namespace mainServer.Controllers.Pages
 
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-// public async Task<IActionResult> DemoPayment(string plan)
-//         {
-//             string client_id = GetUserID();
-
-//             var check_already_subscribed = await DAL.ExecuteReaderAsync<SubModel>(
-//                 @"SELECT subscription_id,client_id,expire_date,validity FROM subscriptions 
-//                 WHERE client_id=@client_id",
-//                 new string[,]{
-//                     {"@client_id", client_id}
-//                 }
-//             );
-
-//             if(check_already_subscribed.Count > 0) return Redirect("~/");
-
-//             var packageDataPrice = await DAL.ExecuteReaderAsync<PackageModelSubPrice>(
-//                 @"SELECT 
-//                 price
-//                 FROM packages WHERE package_name=@package_name",
-//                 new string[,]{
-//                     {"@package_name", plan}
-//                 }
-//             );
-
-
-//             NameValueCollection PostData = new NameValueCollection();
-
-//             PostData.Add("total_amount", packageDataPrice[0].price);
-//             PostData.Add("tran_id", "TESTASPNET1234");
-//             PostData.Add("success_url", "https://localhost:5001/Payment/DemoPaymentSuccessResponse");
-//             PostData.Add("fail_url", "https://localhost:5001/Payment/DemoPaymentFailureResponse"); // "Fail.aspx" page needs to be created
-//             PostData.Add("cancel_url", "https://localhost:5001/"); // "Cancel.aspx" page needs to be created
-//             PostData.Add("version", "3.00");
-//             PostData.Add("cus_name", "ABC XY");
-//             PostData.Add("cus_email", "abc.xyz@mail.co");
-//             PostData.Add("cus_add1", "Address Line On");
-//             PostData.Add("cus_add2", "Address Line Tw");
-//             PostData.Add("cus_city", "City Nam");
-//             PostData.Add("cus_state", "State Nam");
-//             PostData.Add("cus_postcode", "Post Cod");
-//             PostData.Add("cus_country", "Countr");
-//             PostData.Add("cus_phone", "0111111111");
-//             PostData.Add("cus_fax", "0171111111");
-//             PostData.Add("ship_name", "ABC XY");
-//             PostData.Add("ship_add1", "Address Line On");
-//             PostData.Add("ship_add2", "Address Line Tw");
-//             PostData.Add("ship_city", "City Nam");
-//             PostData.Add("ship_state", "State Nam");
-//             PostData.Add("ship_postcode", "Post Cod");
-//             PostData.Add("ship_country", "Countr");
-//             PostData.Add("value_a", plan);
-//             PostData.Add("value_b", "ref00");
-//             PostData.Add("value_c", "ref00");
-//             PostData.Add("value_d", "ref00");
-//             PostData.Add("shipping_method", "NO");
-//             PostData.Add("num_of_item", "1");
-//             PostData.Add("product_name", plan);
-//             PostData.Add("product_profile", "general");
-//             PostData.Add("product_category", "Demo");
-
-//             SSLCommerz sslcz = new SSLCommerz("openc604893a593fe6", "openc604893a593fe6@ssl", true);
-//             String response = sslcz.InitiateTransaction(PostData);
-
-//             return Redirect(response);
-
-//         }
-
-//         public async Task<IActionResult> DemoPaymentSuccessResponse(ValidatePaymentwithIPN checkerModel)
-//         {
-
-//             if(checkerModel.value_a == null) return Content("Error");
-//             // Store record in Subscriptions table that this user is subscribed to this plan  
-//             string Subscription_id = FAuth.GenerateID(13);
-//             string client_id = GetUserID();
-//             //plan = "Ultra";
-
-            
-//             Console.WriteLine(client_id);
-
-//             var packageData = await DAL.ExecuteReaderAsync<PackageModelSub>(
-//                 @"SELECT 
-//                 value,exp_time,auto_renew,package_id
-//                 FROM packages WHERE package_name=@package_name",
-//                 new string[,]{
-//                     {"@package_name", checkerModel.value_a}
-//                 }
-//             );
-
-//             int validity_days = Convert.ToInt32(packageData[0].exp_time);
-//             // Console.WriteLine(validity_days);
-//             var time = MySqlUtility.ConvertTo_MySqlDate(DateTime.Now);
-//             System.DateTime today = System.DateTime.Now;
-//             System.TimeSpan duration = new System.TimeSpan(validity_days, 0, 0, 0);
-//             System.DateTime answer = today.Add(duration);
-//             // Console.WriteLine(today);
-//             // Console.WriteLine(MySqlUtility.ConvertTo_MySqlDate(answer));
-//             var x = MySqlUtility.ConvertTo_MySqlDate(answer);
-//             Console.WriteLine(x.GetType());
-           
-
-
-//             bool res = await DAL.ExecuteNonQueryAsync(
-//                 @"INSERT INTO subscriptions (
-//                     subscription_id,
-//                     client_id,
-//                     start_date,
-//                     expire_date,
-//                     package_id,
-//                     validity
-//                 ) 
-//                 VALUES(
-//                     @subscription_id,
-//                     @client_id,
-//                     @start_date,
-//                     @expire_date,
-//                     "+packageData[0].package_id+@",
-//                     @validity
-//                 )
-//                 ",
-//                 new string[,]{
-//                     {"@subscription_id",Subscription_id},
-//                     {"@client_id",client_id},
-//                     {"@start_date", MySqlUtility.ConvertTo_MySqlDate(DateTime.Now)},
-//                     {"@expire_date", MySqlUtility.ConvertTo_MySqlDate(answer)},
-//                     {"@validity", packageData[0].exp_time}
-//                 }
-//             );
-
-//             Console.WriteLine("Payment Successful");
-
-//             Console.WriteLine(checkerModel.status);
-//             Console.WriteLine(checkerModel.value_a);
-           
-
-//             return View("~/wwwroot/Extensions/PaymentSuccessView.cshtml");
-//         }

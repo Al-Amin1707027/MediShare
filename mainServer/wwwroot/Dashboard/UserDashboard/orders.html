@@ -108,14 +108,10 @@
                 orders.append(
                     $('<tr>').append(
                         $('<th>').text('Serial No.'),
-                        $('<th>').text('Order No'),
                         $('<th>').text('Product Name'),
-                        $('<th>').text('Product Id'),
-                        $('<th>').text('Category'),
                         $('<th>').text('Quantity'),
                         $('<th>').text('Status'),
-                        $('<th>').text('Order Date'),
-                        $('<th>').text('Delivery Date')
+                        $('<th>').text('Order Date')
                     )
                 );
 
@@ -127,11 +123,10 @@
                         chck = true;
                         $('<tr>').append(
                             $('<td class="mailbox-name">').text(serial_no),
-                            $('<td class="mailbox-name">').text("AJDFGYUWB"),
                             $('<td class="mailbox-name">').text(item.product_name),
-                            $('<td class="mailbox-name">').text(item.product_id),
-                            $('<td class="mailbox-name">').text(item.category),
-                            $('<td class="mailbox-name">').text(item.quantity)
+                            $('<td class="mailbox-name">').text(item.quantity),
+                            $('<td class="mailbox-name">').text(item.status),
+                            $('<td class="mailbox-name">').text(item.order_date)
                             
 
                         ).appendTo(orders);

@@ -1,6 +1,15 @@
 using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Authorization;
+using FastAuth;
+using Server;
+using Server2;
+using System.Threading.Tasks;
+using System.Collections.Specialized;
+using Microsoft.AspNetCore.Http;
+using mainServer.Models;
 
 namespace mainServer.Controllers.Dashboard.UserDashboard
 {
@@ -11,26 +20,28 @@ namespace mainServer.Controllers.Dashboard.UserDashboard
         public string product_id{get; set;}
         public string product_name{get; set;}
         public int quantity {get; set;}
-        public string category {get; set;}
+        public string status {get; set;}
+        public string order_date {get; set;}
     }
-    public class OrderController : Controller
+    public class OrderController : BaseController
     {
 
-        public ActionResult<List<OrderModel>> GetOrderList(string pool,int offset_sales,int perPageCount_sales)
+        public async Task<ActionResult<List<OrderModel>>> GetOrderList(string pool,int offset_sales,int perPageCount_sales)
         {
 
-            Console.WriteLine(pool+" + " + offset_sales);
+            string user_id = GetUserID();
+            if(user_id == null){
+                return Redirect("/Login");
+            }
+            var order_list = await DAL.ExecuteReaderAsync<OrderModel>(
+                @"SELECT product_id,product_name,quantity,status,order_date 
+                FROM orders WHERE user_id=@user_id",
+                new string[,]{
+                    {"@user_id", user_id}
+                }
+            );
 
-            OrderModel OrderModel = new OrderModel();
-            OrderModel.product_id = "HSTEDYCKD";
-            OrderModel.product_name = "Napa Extra";
-            OrderModel.quantity = 9;
-            OrderModel.category = "other";
-
-            List<OrderModel> sales_list = new List<OrderModel>();
-            sales_list.Add(OrderModel);
-
-            return sales_list;
+            return order_list;
         }
         
     }
