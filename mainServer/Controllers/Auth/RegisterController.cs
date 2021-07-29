@@ -19,7 +19,6 @@ namespace MediShare.Controllers.Auth
         {
             string user_PasswordHashed =  Password.ComputeHash(password);
             string verify_code = FAuth.GenerateID(16);
-            string is_verified = "No";
             string user_id = FAuth.GenerateID(16);
 
             //Console.WriteLine(verify_Code);
@@ -77,7 +76,7 @@ namespace MediShare.Controllers.Auth
                         { "@old_password", user_PasswordHashed },
                         { "@first_name", first_name },
                         { "@last_name", last_name },
-                        { "@is_verified", is_verified },
+                        { "@is_verified", "yes" },
                         { "@verify_code", verify_code},
                         { "@created", MySqlUtility.ConvertTo_MySqlDate(DateTime.Now) }
                     }
