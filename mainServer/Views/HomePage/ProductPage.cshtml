@@ -7,7 +7,7 @@
     <div class="row">
         <div  style="margin-top: 70px;">
         <div class="row">
-            <div class="col-md-5">
+            <div class="col-md-7">
                     <div >
                         @{
                             var file_path = "ProductImages/" + Model.file_name;
@@ -16,7 +16,7 @@
                     </div>
             </div>
 
-            <div class="col-md-7">
+            <div class="col-md-5">
                 <p style="" class="newarrival text-centre">NEW</p>
                 <h2>@Model.product_name</h2>
                 <p class="price">৳@Model.per_unit_price</p>
@@ -74,7 +74,7 @@
                     
                     $('<div class="col-lg-2 col-md-4 mb-2">').append(
                         $('<div class="card h-60">').append(
-                            $('<a href="#!"><img class="card-img-top" src='+ file_path +' width="150" height="70" alt="..." />'),
+                            $('<a href="#!"><img class="card-img-top" src='+ file_path +' width="200" height="70" alt="..." />'),
                             $('<div class="card-body">').append(
                                 $('<a href="/ProductPage">').text(item.product_name),
                                 $('<h5>').text("৳"+item.per_unit_price+".00"),

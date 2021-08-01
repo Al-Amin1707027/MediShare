@@ -7,6 +7,7 @@ using Server;
 using System.Collections.Generic;
 using mainServer.Models;
 using mainServer.Controllers;
+using mainServer.Controllers.Pages;
 
 namespace MediShare.Controllers
 {
@@ -115,6 +116,28 @@ namespace MediShare.Controllers
 
             return res;
         }
+
+        public async Task<ActionResult> CartVal()
+        {
+            
+
+            string user_id = GetUserID();
+            // if(user_id == null){
+            //     return Redirect("/Login");
+            // }
+
+            var res = await DAL.ExecuteReaderAsync<BuyNoworAddtoCartModel>(
+                @"SELECT product_name,quantity,price,product_id,file_name,user_id 
+                FROM cart WHERE user_id=@user_id",
+                new string[,]{
+                    {"@user_id", user_id}
+                }
+            );
+
+            return Ok(res.Count);
+        }
+
+        
         
     }
 }
