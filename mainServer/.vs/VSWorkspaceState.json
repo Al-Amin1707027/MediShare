@@ -2,8 +2,11 @@
   "ExpandedNodes": [
     "",
     "\\Controllers",
-    "\\Controllers\\Auth"
+    "\\Controllers\\Auth",
+    "\\Views",
+    "\\Views\\Dashboard",
+    "\\Views\\Dashboard\\AdminDashboard"
   ],
-  "SelectedNode": "\\Controllers\\Auth\\LogoutController.cs",
+  "SelectedNode": "\\Views\\Dashboard\\AdminDashboard\\Index.cshtml",
   "PreviewInSolutionExplorer": false
 }
