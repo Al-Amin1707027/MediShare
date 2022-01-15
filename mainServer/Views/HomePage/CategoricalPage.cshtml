@@ -1,0 +1,78 @@
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <h3 class="my-4">Categories</h3>
+                    <div class="list-group">
+                        <ul class="list-group">
+                           <a class="list-group-item list-group-item-dark" href="/Categorical?category=Heart Drugs">Heart Drugs</a>
+                            <a class="list-group-item list-group-item-dark" href="/Categorical?category=Everyday Drugs">Everyday Drugs</a>
+                            <a class="list-group-item list-group-item-dark" href="/Categorical?category=Other Drugs">Other Drugs</a>
+                            <a class="list-group-item list-group-item-dark" href="/Categorical?category=Medical Equipments">Medical Equipments</a>
+                        </ul>
+                        
+                        
+                    </div>
+                </div>
+                <div class="col-lg-9">
+                    <div class="carousel slide my-4" id="carouselExampleIndicators" data-ride="carousel">
+                        <p id="category"></p>
+                    </div>
+
+                    <div class="row" id="product_cards">
+                       
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+<script
+          src="https://code.jquery.com/jquery-3.4.1.min.js"
+          integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+          crossorigin="anonymous"></script>
+
+<script type="text/javascript" charset="utf-8">
+
+    LoadProducts();
+
+    function LoadProducts(){
+        var cat_name ='@Html.Raw(Model.product_name)';
+
+
+        $.ajax({
+            type : "GET",
+            url : "/Categorical/GetProductListbyCategory?category="+cat_name,
+            success : function(response){
+                var card_container = $("#product_cards");
+                card_container.empty();
+
+                $.each(response, function(i,item){
+                    var file_path = "ProductImages/"+item.file_name;
+
+                    $('<div class="col-lg-3 col-md-5 mb-3">').append(
+                        $('<div class="card h-65">').append(
+                            $('<a href="/ProductPage?product_id='+item.product_id+'"><img class="card-img-top" src='+ file_path +' width="200" height="100" alt="..." />'),
+                            $('<div class="card-body">').append(
+                                $('<a href="/ProductPage?product_id='+item.product_id+'">').text(item.product_name),
+                                $('<h5>').text("৳"+item.per_unit_price+".00")
+                            )
+                        )
+                     ).appendTo(card_container);
+                });
+
+         
+            },
+            failure : function(response){
+                alert(response);
+            }
+        });
+    }
+
+</script>

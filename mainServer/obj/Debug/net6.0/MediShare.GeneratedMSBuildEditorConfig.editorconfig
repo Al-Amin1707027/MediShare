@@ -1,0 +1,76 @@
+is_global = true
+build_property.TargetFramework = net6.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = MediShare
+build_property.RootNamespace = MediShare
+build_property.ProjectDir = /home/ghostrideraaa/3.1_all_labs/web_lab/MediShare/mainServer/
+build_property.RazorLangVersion = 6.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = /home/ghostrideraaa/3.1_all_labs/web_lab/MediShare/mainServer
+build_property._RazorSourceGeneratorDebug = 
+
+[/home/ghostrideraaa/3.1_all_labs/web_lab/MediShare/mainServer/Extra/fileupload.cshtml]
+build_metadata.AdditionalFiles.TargetPath = RXh0cmEvZmlsZXVwbG9hZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/ghostrideraaa/3.1_all_labs/web_lab/MediShare/mainServer/Views/Auth/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQXV0aC9Mb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/ghostrideraaa/3.1_all_labs/web_lab/MediShare/mainServer/Views/Auth/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQXV0aC9SZWdpc3Rlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/ghostrideraaa/3.1_all_labs/web_lab/MediShare/mainServer/Views/Dashboard/AdminDashboard/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRGFzaGJvYXJkL0FkbWluRGFzaGJvYXJkL0luZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/ghostrideraaa/3.1_all_labs/web_lab/MediShare/mainServer/Views/Dashboard/UserDashboard/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRGFzaGJvYXJkL1VzZXJEYXNoYm9hcmQvSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/ghostrideraaa/3.1_all_labs/web_lab/MediShare/mainServer/Views/HomePage/CartPage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZVBhZ2UvQ2FydFBhZ2UuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/ghostrideraaa/3.1_all_labs/web_lab/MediShare/mainServer/Views/HomePage/CategoricalPage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZVBhZ2UvQ2F0ZWdvcmljYWxQYWdlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/ghostrideraaa/3.1_all_labs/web_lab/MediShare/mainServer/Views/HomePage/index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZVBhZ2UvaW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/ghostrideraaa/3.1_all_labs/web_lab/MediShare/mainServer/Views/HomePage/ProductPage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZVBhZ2UvUHJvZHVjdFBhZ2UuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/ghostrideraaa/3.1_all_labs/web_lab/MediShare/mainServer/Views/Shared/LoginRegisterLayout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0xvZ2luUmVnaXN0ZXJMYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/ghostrideraaa/3.1_all_labs/web_lab/MediShare/mainServer/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/ghostrideraaa/3.1_all_labs/web_lab/MediShare/mainServer/wwwroot/Extensions/EmailVerificationView.cshtml]
+build_metadata.AdditionalFiles.TargetPath = d3d3cm9vdC9FeHRlbnNpb25zL0VtYWlsVmVyaWZpY2F0aW9uVmlldy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/ghostrideraaa/3.1_all_labs/web_lab/MediShare/mainServer/wwwroot/Extensions/PaymentFailureView.cshtml]
+build_metadata.AdditionalFiles.TargetPath = d3d3cm9vdC9FeHRlbnNpb25zL1BheW1lbnRGYWlsdXJlVmlldy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/ghostrideraaa/3.1_all_labs/web_lab/MediShare/mainServer/wwwroot/Extensions/PaymentSuccessView.cshtml]
+build_metadata.AdditionalFiles.TargetPath = d3d3cm9vdC9FeHRlbnNpb25zL1BheW1lbnRTdWNjZXNzVmlldy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/ghostrideraaa/3.1_all_labs/web_lab/MediShare/mainServer/wwwroot/Extensions/RegistrationView.cshtml]
+build_metadata.AdditionalFiles.TargetPath = d3d3cm9vdC9FeHRlbnNpb25zL1JlZ2lzdHJhdGlvblZpZXcuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 

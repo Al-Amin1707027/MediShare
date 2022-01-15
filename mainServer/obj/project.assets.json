@@ -1,7 +1,7 @@
 {
   "version": 3,
   "targets": {
-    ".NETCoreApp,Version=v3.1": {
+    "net6.0": {
       "BCrypt.Net-Core/1.6.0": {
         "type": "package",
         "compile": {
@@ -75,10 +75,10 @@
           "MimeKit": "2.12.0"
         },
         "compile": {
-          "lib/netstandard2.1/MailKit.dll": {}
+          "lib/net50/MailKit.dll": {}
         },
         "runtime": {
-          "lib/netstandard2.1/MailKit.dll": {}
+          "lib/net50/MailKit.dll": {}
         }
       },
       "Microsoft.AspNetCore.Authentication/2.2.0": {
@@ -556,10 +556,10 @@
           "System.Text.Encoding.CodePages": "4.4.0"
         },
         "compile": {
-          "lib/netstandard2.1/MimeKit.dll": {}
+          "lib/net50/MimeKit.dll": {}
         },
         "runtime": {
-          "lib/netstandard2.1/MimeKit.dll": {}
+          "lib/net50/MimeKit.dll": {}
         }
       },
       "MySql.Data/8.0.23": {
@@ -577,14 +577,14 @@
           "System.Text.Encoding.CodePages": "4.4.0"
         },
         "compile": {
-          "lib/netstandard2.1/MySql.Data.dll": {},
-          "lib/netstandard2.1/Ubiety.Dns.Core.dll": {},
-          "lib/netstandard2.1/Zstandard.Net.dll": {}
+          "lib/net5.0/MySql.Data.dll": {},
+          "lib/net5.0/Ubiety.Dns.Core.dll": {},
+          "lib/net5.0/Zstandard.Net.dll": {}
         },
         "runtime": {
-          "lib/netstandard2.1/MySql.Data.dll": {},
-          "lib/netstandard2.1/Ubiety.Dns.Core.dll": {},
-          "lib/netstandard2.1/Zstandard.Net.dll": {}
+          "lib/net5.0/MySql.Data.dll": {},
+          "lib/net5.0/Ubiety.Dns.Core.dll": {},
+          "lib/net5.0/Zstandard.Net.dll": {}
         }
       },
       "Newtonsoft.Json/10.0.1": {
@@ -5685,7 +5685,7 @@
     }
   },
   "projectFileDependencyGroups": {
-    ".NETCoreApp,Version=v3.1": [
+    "net6.0": [
       "BCrypt.Net-Core >= 1.6.0",
       "MailKit >= 2.12.0",
       "Microsoft.AspNetCore.Authentication >= 2.2.0",
@@ -5696,36 +5696,29 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\GhostRiderAAA\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "/home/ghostrideraaa/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\WebAPIProjects\\MediShare\\mainServer\\MediShare.csproj",
+      "projectUniqueName": "/home/ghostrideraaa/3.1_all_labs/web_lab/MediShare/mainServer/MediShare.csproj",
       "projectName": "MediShare",
-      "projectPath": "C:\\WebAPIProjects\\MediShare\\mainServer\\MediShare.csproj",
-      "packagesPath": "C:\\Users\\GhostRiderAAA\\.nuget\\packages\\",
-      "outputPath": "C:\\WebAPIProjects\\MediShare\\mainServer\\obj\\",
+      "projectPath": "/home/ghostrideraaa/3.1_all_labs/web_lab/MediShare/mainServer/MediShare.csproj",
+      "packagesPath": "/home/ghostrideraaa/.nuget/packages/",
+      "outputPath": "/home/ghostrideraaa/3.1_all_labs/web_lab/MediShare/mainServer/obj/",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\GhostRiderAAA\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/home/ghostrideraaa/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
-        "netcoreapp3.1"
+        "net6.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Users\\GhostRiderAAA\\AppData\\Roaming\\NuGet\\~\\my\\nuget-packages\\": {}
+        "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
-        "netcoreapp3.1": {
-          "targetAlias": "netcoreapp3.1",
+        "net6.0": {
+          "targetAlias": "net6.0",
           "projectReferences": {}
         }
       },
@@ -5736,8 +5729,8 @@
       }
     },
     "frameworks": {
-      "netcoreapp3.1": {
-        "targetAlias": "netcoreapp3.1",
+      "net6.0": {
+        "targetAlias": "net6.0",
         "dependencies": {
           "BCrypt.Net-Core": {
             "target": "Package",
@@ -5786,7 +5779,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.301\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.101/RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -1,0 +1,8 @@
+body{
+    min-height: 100vh;
+}
+
+.c_footer{
+    position: sticky;
+    top: 100%;
+}
