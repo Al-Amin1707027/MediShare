@@ -48,17 +48,22 @@
                                     <input type="text" name="quantity" class="form-control" id="pkgnnm" placeholder="Enter package price">
                                 </div>
                                 <div class="form-group">
-                                    <label for="pkgnm">Per Unit Price</label>
-                                    <input type="text" name="per_unit_price" class="form-control" id="pkgnnm" placeholder="Enter package price">
-                                </div>
-                                <div class="form-group">
                                     <label for="remark_list">Remark</label>
-                                    <input list="remark_list" name="remark" class="form-control">
-                                        <datalist id="remark_list">
+                                    <!-- <input list="remark_list" name="remark" class="form-control">
+                                        <datalist id="remark_list" onchange="checkRemark(this.value)">
                                             <option value="sale"></option>
                                             <option value="donate"></option>
-                                        </datalist>
+                                        </datalist> -->
+                                        <select id ="ddl" name="remark" onmousedown="this.value='';" onchange="checkRemark(this.value);">
+                                            <option value='sale'>Sale</option>
+                                            <option value='donate'>Donate</option>
+                                        </select>
                                 </div>
+                                <div class="form-group">
+                                    <label for="pkgnm">Per Unit Price</label>
+                                    <input type="text" name="per_unit_price" class="form-control" id="per_unit_price" placeholder="Enter package price">
+                                </div>
+                                
                                 <div>
                                     <dl>
                                         <dt>
@@ -410,6 +415,15 @@
             }
         });
 
+    }
+
+
+
+    function checkRemark(remark){
+        if(remark == 'donate'){
+            document.getElementById('per_unit_price').value = 0;
+            console.log(remark);
+        }
     }
 </script>
 

@@ -79,10 +79,8 @@ namespace mainServer.Controllers.Dashboard.UserDashboard
         {
             
             
-            Console.WriteLine(product_name);
-            Console.WriteLine(category);
-            Console.WriteLine(quantity);
-            Console.WriteLine(per_unit_price);
+            
+            Console.WriteLine(remark);
             
             string fileName = "";
 
@@ -91,13 +89,13 @@ namespace mainServer.Controllers.Dashboard.UserDashboard
                 fileName = DateTime.Now.Ticks + extension;
                 Console.WriteLine(fileName);
 
-                var pathBuilt = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\ProductImages");
+                var pathBuilt = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot//ProductImages");
 
                 if(!Directory.Exists(pathBuilt)){
                     Directory.CreateDirectory(pathBuilt);
                 }
 
-                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\ProductImages",fileName);
+                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot//ProductImages",fileName);
 
                 using (var stream = new FileStream(path, FileMode.Create))
                 {

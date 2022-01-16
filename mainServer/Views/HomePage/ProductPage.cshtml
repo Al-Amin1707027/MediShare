@@ -7,7 +7,7 @@
     <div class="row">
         <div  style="margin-top: 70px;">
         <div class="row">
-            <div class="col-md-7">
+            <div class="col-md-8">
                     <div >
                         @{
                             var file_path = "ProductImages/" + Model.file_name;
@@ -16,7 +16,7 @@
                     </div>
             </div>
 
-            <div class="col-md-5">
+            <div class="col-md-6">
                 <p style="" class="newarrival text-centre">NEW</p>
                 <h2>@Model.product_name</h2>
                 <p class="price">৳@Model.per_unit_price</p>
@@ -29,16 +29,17 @@
                 @* onclick="PackageDetails(\'' + item.package_name + '\')" *@
             </div>
         </div>
-        <br>
+        
+    </div>
+    </div>
+
+    <br>
         <br>
         <h5>You May also buy these</h5>
         <br>
         <div class="row centre" id="product_cards">
         </div>
-
-
-    </div>
-    </div>
+        <div><br><br></div>
 </div>
 
 
@@ -74,12 +75,12 @@
                     
                     $('<div class="col-lg-2 col-md-4 mb-2">').append(
                         $('<div class="card h-60">').append(
-                            $('<a href="#!"><img class="card-img-top" src='+ file_path +' width="200" height="70" alt="..." />'),
+                            $('<a href="#!"><img class="card-img-top" src='+ file_path +' width="180" height="70" alt="..." />'),
                             $('<div class="card-body">').append(
-                                $('<a href="/ProductPage">').text(item.product_name),
+                                $('<a href="/ProductPage?product_id='+item.product_id+'">').text(item.product_name),
                                 $('<h5>').text("৳"+item.per_unit_price+".00"),
-                                $('<a  class="btn btn-outline-secondary" onclick="PackageDetails(\'' + item.package_name + '\')">').text('Add To Cart'),
-                                $('<a  class="btn btn-outline-secondary" onclick="BuyNow(\'' + item.product_id + '\')">').text('Buy Now')
+                                @* $('<a  class="btn btn-outline-secondary" onclick="PackageDetails(\'' + item.package_name + '\')">').text('Add To Cart'),
+                                $('<a  class="btn btn-outline-secondary" onclick="BuyNow(\'' + item.product_id + '\')">').text('Buy Now') *@
                             )
                         )
                      ).appendTo(card_container);
@@ -124,67 +125,5 @@
 
 
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-@* class ProductInfo{
-        
-        constructor(product_id, quantity) {
-            this.product_id = product_id;
-            this.quantity = quantity;
-        }
-    }
-
-    function BuyNow(product_id){
-
-        
-        var product_info = new ProductInfo(product_id,1);
-        var product_info2 = new ProductInfo("JHSYEBORH*#HDF",5);
-        var product_info_array = [];
-        product_info_array.push(product_info);
-        product_info_array.push(product_info2);
-
-        var theIds = JSON.stringify(product_info_array);
-        console.log(theIds);
-
-        
-
-        $.ajax ({
-            type: "POST",
-            url: "/Payment/DemoPayment2", 
-            contentType: "application/json; charset=utf-8",
-            data: theIds,
-            dataType: "json",
-            success: function (result) {
-                alert('Yay! It worked!');               
-            },
-            error: function (result) {
-                alert('Oh no :(');
-            }
-        });
-
-
-        c# code recieve this json data using following parmeter in the function
-        [FromBody]List<ProductInfo> pinfo
-        c#    model will be
-        public class ProductInfo
-            {
-                public string product_id {get; set;}
-                public int quantity {get; set;} 
-            }
-
-    } *@
 
 

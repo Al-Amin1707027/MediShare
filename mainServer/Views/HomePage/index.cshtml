@@ -81,17 +81,31 @@
                 $.each(response, function(i,item){
                     var file_path = "ProductImages/"+item.file_name;
 
-                    $('<div class="col-lg-3 col-md-5 mb-3">').append(
+                    if(item.per_unit_price == 0){
+                        $('<div class="col-lg-3 col-md-5 mb-3">').append(
                         $('<div class="card h-65">').append(
                             $('<a href="/ProductPage?product_id='+item.product_id+'"><img class="card-img-top" src='+ file_path +' width="200" height="100" alt="..." />'),
                             $('<div class="card-body">').append(
                                 $('<a href="/ProductPage?product_id='+item.product_id+'">').text(item.product_name),
-                                $('<h5>').text("৳"+item.per_unit_price+".00"),
+                                $('<h5>').text("For Donation")
                                 @* $('<a  class="btn btn-outline-secondary" onclick="PackageDetails(\'' + item.package_name + '\')">').text('Add To Cart'), *@
                                 @* $('<a  class="btn btn-outline-secondary" onclick="PackageDetails(\'' + item.package_name + '\')">').text('Buy Now') *@
                             )
                         )
                      ).appendTo(card_container);
+                    }else{
+                        $('<div class="col-lg-3 col-md-5 mb-3">').append(
+                        $('<div class="card h-65">').append(
+                            $('<a href="/ProductPage?product_id='+item.product_id+'"><img class="card-img-top" src='+ file_path +' width="200" height="100" alt="..." />'),
+                            $('<div class="card-body">').append(
+                                $('<a href="/ProductPage?product_id='+item.product_id+'">').text(item.product_name),
+                                $('<h5>').text("৳"+item.per_unit_price+".00")
+                                @* $('<a  class="btn btn-outline-secondary" onclick="PackageDetails(\'' + item.package_name + '\')">').text('Add To Cart'), *@
+                                @* $('<a  class="btn btn-outline-secondary" onclick="PackageDetails(\'' + item.package_name + '\')">').text('Buy Now') *@
+                            )
+                        )
+                     ).appendTo(card_container);
+                    }
                 });
 
          
