@@ -19,6 +19,12 @@ namespace mainServer.Controllers.Dashboard.UserDashboard
         public int quantity {get; set;}
         public string category {get; set;}
     }
+    public class editModel{
+        public string product_name{get; set;}
+        public string per_unit_price{get; set;}
+        public int quantity {get; set;}
+        public string product_id {get; set;}
+    }
 
 
     public class SalesController : BaseController
@@ -153,6 +159,59 @@ namespace mainServer.Controllers.Dashboard.UserDashboard
             );
 
             return Redirect("~/userdashboard");
+        }
+
+        public async Task<IActionResult> salesDel(string p_id)
+        {
+
+            bool delRow =await DAL.ExecuteNonQueryAsync(
+                @"DELETE FROM product_list 
+                WHERE product_id = @p_id",
+                new string[,]{
+                    {"@p_id",p_id}
+                }
+            );
+
+
+            return Ok(200);
+        }
+
+        public async Task<ActionResult<List<ProductModel>>> GetProductDataForEdit(string p_id)
+        {
+            var res = await DAL.ExecuteReaderAsync<ProductModel>(
+                @"SELECT product_id,product_name,category,
+                    quantity,upload_date,number_of_orders,
+                    status,user_shop_id,per_unit_price,file_name
+                FROM product_list WHERE product_id = @p_id ",
+                new string[,]{
+                    {"@p_id",p_id}
+
+                }
+            ); 
+
+            return res;
+        }
+
+        public async Task<IActionResult> EditPdata(editModel eModel)
+        {   
+            Console.WriteLine(eModel.product_id);
+            Console.WriteLine(eModel.product_name);
+            Console.WriteLine(eModel.per_unit_price);
+            Console.WriteLine(eModel.quantity);
+            bool EditDatahostsTable =await DAL.ExecuteNonQueryAsync(
+                @"UPDATE product_list SET 
+                product_name = @product_name,
+                quantity = "+eModel.quantity+@",
+                per_unit_price = @per_unit_price
+                WHERE product_id = @product_id",
+                new string[,]{
+                    {"@product_name", eModel.product_name},
+                    {"@per_unit_price", eModel.per_unit_price},
+                    {"@product_id", eModel.product_id}
+                }
+            );
+
+            return Ok(200);
         }
     }
 }

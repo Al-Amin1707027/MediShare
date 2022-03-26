@@ -1,13 +1,10 @@
 /home/ghostrideraaa/3.1_all_labs/web_lab/MediShare/mainServer/bin/Debug/net6.0/appsettings.Development.json
 /home/ghostrideraaa/3.1_all_labs/web_lab/MediShare/mainServer/bin/Debug/net6.0/appsettings.json
-/home/ghostrideraaa/3.1_all_labs/web_lab/MediShare/mainServer/bin/Debug/net6.0/startbootstrap-shop-homepage-master/package-lock.json
-/home/ghostrideraaa/3.1_all_labs/web_lab/MediShare/mainServer/bin/Debug/net6.0/startbootstrap-shop-homepage-master/package.json
 /home/ghostrideraaa/3.1_all_labs/web_lab/MediShare/mainServer/bin/Debug/net6.0/MediShare.staticwebassets.runtime.json
 /home/ghostrideraaa/3.1_all_labs/web_lab/MediShare/mainServer/bin/Debug/net6.0/MediShare
 /home/ghostrideraaa/3.1_all_labs/web_lab/MediShare/mainServer/bin/Debug/net6.0/MediShare.deps.json
 /home/ghostrideraaa/3.1_all_labs/web_lab/MediShare/mainServer/bin/Debug/net6.0/MediShare.runtimeconfig.json
 /home/ghostrideraaa/3.1_all_labs/web_lab/MediShare/mainServer/bin/Debug/net6.0/MediShare.dll
-/home/ghostrideraaa/3.1_all_labs/web_lab/MediShare/mainServer/bin/Debug/net6.0/ref/MediShare.dll
 /home/ghostrideraaa/3.1_all_labs/web_lab/MediShare/mainServer/bin/Debug/net6.0/MediShare.pdb
 /home/ghostrideraaa/3.1_all_labs/web_lab/MediShare/mainServer/bin/Debug/net6.0/BCrypt.Net-Core.dll
 /home/ghostrideraaa/3.1_all_labs/web_lab/MediShare/mainServer/bin/Debug/net6.0/Google.Protobuf.dll
@@ -62,3 +59,4 @@
 /home/ghostrideraaa/3.1_all_labs/web_lab/MediShare/mainServer/obj/Debug/net6.0/ref/MediShare.dll
 /home/ghostrideraaa/3.1_all_labs/web_lab/MediShare/mainServer/obj/Debug/net6.0/MediShare.pdb
 /home/ghostrideraaa/3.1_all_labs/web_lab/MediShare/mainServer/obj/Debug/net6.0/MediShare.genruntimeconfig.cache
+/home/ghostrideraaa/3.1_all_labs/web_lab/MediShare/mainServer/obj/Debug/net6.0/refint/MediShare.dll
