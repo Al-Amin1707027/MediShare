@@ -1,7 +1,7 @@
 # MediShare
  
 **This is a medicine sharing website developed using asp.net core web api.
-It is developed in a way that people can sell their extra drugs or donate them.**
+It is developed in a way that people can sell their extra drugs or donate them. I have also added sslcommerz payment gateway for all the payment purpose.**
 
 **Technology used:
 1. ASP.net core web API
