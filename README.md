@@ -59,16 +59,16 @@ Cart Page
 
 
 
-![image](https://user-images.githubusercontent.com/78086376/199029291-8a28a745-9283-4957-b0e1-a6f8f424e7e1.png)
+![image](https://user-images.githubusercontent.com/78086376/199039802-580269ac-6ccb-4fb0-ad2f-60c94896b290.png)
 
-Doctors List Page
-
-
+sslcommerz payment gateway
 
 
-![image](https://user-images.githubusercontent.com/78086376/199029912-bc1dd823-0064-46b4-bd2d-0ddd682b8b76.png)
 
-Doctor’s Profile Page
+
+![image](https://user-images.githubusercontent.com/78086376/199040025-6050c2fe-0da7-4146-930b-8bb0fda0c1ff.png)
+
+Profile dashboard
 
 
 
